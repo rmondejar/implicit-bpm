@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="JAVA_MODULE" version="4">
+  <component name="EclipseModuleManager">
+    <varelement var="file://$GRAILS_ROOT$/2.2.3/projects/implicit-bpm/plugins/hibernate-2.2.3/grails-app/i18n" value="linksrc:.link_to_grails_plugins/hibernate-2.2.3/grails-app/i18n" />
+    <varelement var="file://$GRAILS_ROOT$/2.2.3/projects/implicit-bpm/plugins/release-2.2.1/src/groovy" value="linksrc:.link_to_grails_plugins/release-2.2.1/src/groovy" />
+    <varelement var="file://$GRAILS_ROOT$/2.2.3/projects/implicit-bpm/plugins/release-2.2.1/src/java" value="linksrc:.link_to_grails_plugins/release-2.2.1/src/java" />
+    <varelement var="file://$GRAILS_ROOT$/2.2.3/projects/implicit-bpm/plugins/rest-client-builder-1.0.3/src/groovy" value="linksrc:.link_to_grails_plugins/rest-client-builder-1.0.3/src/groovy" />
+    <conelement value="org.grails.ide.eclipse.core.CLASSPATH_CONTAINER" />
+    <src_description expected_position="1">
+      <src_folder value="file://$MODULE_DIR$/src/groovy" expected_position="0" />
+      <src_folder value="file://$MODULE_DIR$/grails-app/conf" expected_position="1" />
+      <src_folder value="GROOVY_DSL_SUPPORT" expected_position="3" />
+      <src_folder value="file://$GRAILS_ROOT$/2.2.3/projects/implicit-bpm/plugins/hibernate-2.2.3/grails-app/i18n" expected_position="4" />
+      <src_folder value="file://$GRAILS_ROOT$/2.2.3/projects/implicit-bpm/plugins/release-2.2.1/src/groovy" expected_position="5" />
+      <src_folder value="file://$GRAILS_ROOT$/2.2.3/projects/implicit-bpm/plugins/release-2.2.1/src/java" expected_position="6" />
+      <src_folder value="file://$GRAILS_ROOT$/2.2.3/projects/implicit-bpm/plugins/rest-client-builder-1.0.3/src/groovy" expected_position="7" />
+    </src_description>
+  </component>
+  <component name="NewModuleRootManager" inherit-compiler-output="true">
+    <exclude-output />
+    <orderEntry type="sourceFolder" forTests="false" />
+  </component>
+</module>
+
