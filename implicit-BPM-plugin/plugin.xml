@@ -1,4 +1,4 @@
-<plugin name='implicit-bpm' version='0.1-SNAPSHOT' grailsVersion='2.2 &gt; *'>
+<plugin name='implicit-bpm' version='0.2-SNAPSHOT' grailsVersion='2.2 &gt; *'>
   <author>Ruben Mondejar</author>
   <authorEmail>ruben.mondejar@urv.cat</authorEmail>
   <title>Grails Implicit BPM Plugin</title>

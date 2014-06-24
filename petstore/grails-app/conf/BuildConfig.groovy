@@ -56,6 +56,6 @@ grails.project.dependency.resolution = {
         runtime ":resources:1.1.6"
         build ":tomcat:$grailsVersion"
         compile ':cache:1.0.1'
-		compile ':implicit-bpm:0.1-SNAPSHOT'
+		compile ':implicit-bpm:0.2-SNAPSHOT'
     }
 }

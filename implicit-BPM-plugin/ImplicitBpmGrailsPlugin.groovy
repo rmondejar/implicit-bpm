@@ -23,7 +23,7 @@ import net.sf.bpm.implicit.util.ImplicitBpmUtils
 
 class ImplicitBpmGrailsPlugin {
 
-    def version = "0.1-SNAPSHOT"
+    def version = "0.2-SNAPSHOT"
     def grailsVersion = "2.2 > *"
     def author = 'Ruben Mondejar'
     def authorEmail = 'ruben.mondejar@urv.cat'
