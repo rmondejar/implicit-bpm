@@ -1,4 +1,4 @@
-<plugin name='implicit-bpm' version='0.2-SNAPSHOT' grailsVersion='2.2 &gt; *'>
+<plugin name='implicit-bpm' version='0.3-SNAPSHOT' grailsVersion='2.2 &gt; *'>
   <author>Ruben Mondejar</author>
   <authorEmail>ruben.mondejar@urv.cat</authorEmail>
   <title>Grails Implicit BPM Plugin</title>
@@ -7,7 +7,9 @@
   <type>ImplicitBpmGrailsPlugin</type>
   <resources>
     <resource>DefaultImplicitBpmConfig</resource>
+    <resource>ImplicitBpmBootStrap</resource>
     <resource>net.sf.bpm.implicit.ProxyController</resource>
+    <resource>implicit.PlatformService</resource>
   </resources>
   <repositories>
     <repository name='grailsCentral' url='http://grails.org/plugins' />
@@ -16,6 +18,8 @@
   <dependencies>
     <compile>
       <dependency group='org.hibernate' name='hibernate-core' version='3.6.10.Final' />
+      <dependency group='org.codehaus.groovy.modules.http-builder' name='http-builder' version='0.7.1' />
+      <dependency group='commons-codec' name='commons-codec' version='1.6' />
     </compile>
     <runtime>
       <dependency group='org.aspectj' name='aspectjrt' version='1.7.4' />

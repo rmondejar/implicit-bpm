@@ -1,54 +1,27 @@
 if (typeof jQuery !== 'undefined') {
 	(function($) {
-		$('#spinner').ajaxStart(function() {
+		$('#spinner,.spinner').ajaxStart(function() {
 			$(this).fadeIn();
 		}).ajaxStop(function() {
 			$(this).fadeOut();
 		});
 	})(jQuery);
-	
-	// Typeahead en casella de cerca de clients
-	var autocomplete = $('#idClientSearch').typeahead().on('keyup', function(ev){
-
-	    ev.stopPropagation();
-	    ev.preventDefault();
-	
-	    if( $.inArray(ev.keyCode,[40,38,9,13,27]) === -1 ){
-	
-	        var self = $(this);
-	        
-	        self.data('typeahead').source = [];
-	
-	        if( !self.data('active') && self.val().length > 0){
-	
-	            self.data('active', true);
-	
-	            $.getJSON("/ma3/cerca/clients",{
-	                q: $(this).val()
-	            }, function(data) {
-	                self.data('active',true);
-	
-	                var arr = [], i=data.length;
-	                while(i--){	                	
-	                    arr[i] = "[" + data[i].id + "] - " + data[i].descripcio 
-	                }
-	
-	                self.data('typeahead').source = arr;
-	
-	                self.trigger('keyup');
-	
-	                self.data('active', false);
-	
-	            });
-	
-	        }
-	    }
-	});
 }
 
+// Activació automàtica dels tabs actius per les vistes
+$(document).ready(function() {
+    if (location.hash !== '') $('a[href="' + location.hash + '"]').tab('show');
+    $('a[data-toggle="tab"]').on('shown', function(e) {
+    	return location.hash = $(e.target).attr('href').substr(1);
+    });
 
-function fillDades(data, textStatus) {
-	$("#idAplicacio").val($(data).find("nom").text());
-	$("#descripcio").val($(data).find("des").text());
-}
+    // activació dels inputs datepicker
+	$('.datepicker').datepicker({format: 'dd/mm/yyyy', weekStart: 1, language:'ca', autoclose:true});
+	
+    $('*[title]:not([data-toggle])').addClass('tooltiped');
+    $('*[data-toggle=popover]').popover();
+    $('*[data-toggle=tooltip], .tooltiped').tooltip({container:'body'});
+	
+
+});	
 

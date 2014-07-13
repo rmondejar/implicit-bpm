@@ -29,17 +29,34 @@
 
 private renderFieldForProperty(p, owningClass, prefix = "") {
 	boolean hasHibernate = pluginManager?.hasGrailsPlugin('hibernate') || pluginManager?.hasGrailsPlugin('hibernate4')
-	boolean required = false
-	if (hasHibernate) {
-		cp = owningClass.constrainedProperties[p.name]
-		required = (cp ? !(cp.propertyType in [boolean, Boolean]) && !cp.nullable : false)
-	}
-	%>
-<div class="fieldcontain \${hasErrors(bean: ${propertyName}, field: '${prefix}${p.name}', 'error')} ${required ? 'required' : ''}">
-	<label for="${prefix}${p.name}">
-		<g:message code="${domainClass.propertyName}.${prefix}${p.name}.label" default="${p.naturalName}" />
-		<% if (required) { %><span class="required-indicator">*</span><% } %>
-	</label>
-	${renderEditor(p)}
+    boolean display = true
+    boolean required = false
+    if (hasHibernate) {
+        cp = owningClass.constrainedProperties[p.name]
+        display = (cp ? cp.display : true)
+        required = (cp ? !(cp.propertyType in [boolean, Boolean]) && !cp.nullable && (cp.propertyType != String || !cp.blank) : false)
+    }
+    if (display && cp.propertyType != Boolean) { %>
+
+<div class="control-group \${hasErrors(bean: ${propertyName}, field: '${prefix}${p.name}', 'error')} ${required ? 'required' : ''} col-xs-12">
+    <label class="control-label" for="${prefix}${p.name}">
+        <g:message code="${domainClass.propertyName}.${prefix}${p.name}.label" default="${p.naturalName}" />
+        <% if (required) { %><span class="required-indicator">*</span><% } %>
+    </label>
+    <div class="controls">
+        ${renderEditor(p)}
+    </div>
 </div>
-<%  } %>
+<%  }
+else if (display && cp.propertyType == Boolean) { %>
+
+<div class="control-group \${hasErrors(bean: ${propertyName}, field: '${prefix}${p.name}', 'error')} ${required ? 'required' : ''} col-xs-12">
+    <label class="control-label" for="${prefix}${p.name}">
+        ${renderEditor(p)}
+        <span class="lbl"> <g:message code="${domainClass.propertyName}.${prefix}${p.name}.label" default="${p.naturalName}" /></span>
+        <% if (required) { %><span class="required-indicator">*</span><% } %>
+    </label>
+</div>
+<%  }
+
+} %>

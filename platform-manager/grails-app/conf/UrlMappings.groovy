@@ -7,9 +7,9 @@ class UrlMappings {
             }
         }
 
-        "/"(controller:"remoteApp", action:"index")
-        "/rest/sync"(controller:"remoteApp", action:"sync")
-        "/rest/apps"(controller:"remoteApp", action:"index")
+        "/"(controller:'main')
         "500"(view:'/error')
+
+        "/rest/sync"(controller:'remoteApp', action: [PATCH: 'sync'])
 	}
 }

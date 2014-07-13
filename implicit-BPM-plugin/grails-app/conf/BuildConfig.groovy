@@ -46,6 +46,9 @@ grails.project.dependency.resolution = {
 
 		// other dependencies
 		compile("org.hibernate:hibernate-core:3.6.10.Final")
+
+        compile 'org.codehaus.groovy.modules.http-builder:http-builder:0.7.1'
+        compile 'commons-codec:commons-codec:1.6'
     }
 
     plugins {

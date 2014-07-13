@@ -1,9 +1,11 @@
 package net.sf.bpm.implicit
 
+import grails.transaction.Transactional
 import grails.util.GrailsNameUtils
 import org.camunda.bpm.engine.runtime.ProcessInstance
 import org.camunda.bpm.engine.task.Task
 
+@Transactional
 class WorkflowService {
 	
 	def grailsApplication
@@ -27,7 +29,7 @@ class WorkflowService {
 		//log.info "STARTING PROCESS $p: ${vars.grep({it.key!='__files__'})}"
 		
 		ProcessInstance pi = runtimeService.startProcessInstanceById(taskId, taskName, vars)
-		//log.trace "STARTED PROCESS $p: ${vars.grep({it.key!='__files__'})}: $pi"
+		//println "STARTED PROCESS $p: ${vars.grep({it.key!='__files__'})}: $pi"
 		pi
 	}
 
@@ -42,7 +44,7 @@ class WorkflowService {
 
         def existingVars = taskService.getVariables(taskid)
 
-		log.trace "SAVE TASK $taskid: complete=$complete: $vars"
+		println "SAVE TASK $taskid: complete=$complete: $vars"
 		println "SAVE TASK $taskid: complete=$complete: $vars"
 
 		removeFromArrays(taskid, existingVars, vars)
@@ -248,7 +250,7 @@ class WorkflowService {
 	
 	// Values via getFormData
 	def getFormValuesExtra(values) {
-		log.trace "EXTRA VALUES: $values"
+		println "EXTRA VALUES: $values"
 		return values?.__extra__ ?: [:]
 	}
 	
@@ -292,21 +294,12 @@ class WorkflowService {
 		def q = historyService.createHistoricProcessInstanceQuery()
 		q.listPage(params.offset?:0, params.max)
 	}
-
-//	def getProcessInstance(Request req, includevariables = true) {
-//		if (!req.activitiId) return null
-//		getProcessInstance(req.activitiId, includevariables)
-//	}
 	
-	def getProcessInstance(id, includevariables = true) {
+	def getProcessInstance(id) {
 		def q = runtimeService.createProcessInstanceQuery().processInstanceId(id)
-		if (includevariables)
-			q = q.includeProcessVariables()
 		def pi = q.singleResult()
 		if (!pi) {
 			q = historyService.createHistoricProcessInstanceQuery().processInstanceId(id)
-			if (includevariables)
-				q = q.includeProcessVariables()
 			pi = q.singleResult()
 		}
 		//println pi.processProperties
@@ -315,31 +308,24 @@ class WorkflowService {
 	}
 	
 	
-	def getPITasks(processInstanceId, includevariables = true) {
-		def q = historyService.createHistoricTaskInstanceQuery().processInstanceId(processInstanceId).orderByHistoricTaskInstanceStartTime().asc()
-		if (includevariables) {
-			q = q.includeProcessVariables()
-		}
-		q.list()
+	def getPITasks(processInstanceId) {
+		historyService.createHistoricTaskInstanceQuery().processInstanceId(processInstanceId).orderByHistoricActivityInstanceStartTime().asc().list()
 	}
 	
-	def getPIOpenTasks(processInstanceId, includevariables = true) {
-		def q = taskService.createTaskQuery().processInstanceId(processInstanceId).orderByTaskCreateTime().asc()
-		if (includevariables)
-			q.includeProcessVariables()
-		q.list()
+	def getPIOpenTasks(processInstanceId) {
+		taskService.createTaskQuery().processInstanceId(processInstanceId).orderByTaskCreateTime().asc().list()
 		
 	}
 	
-	def getPIOpenTasks(List processInstanceIds, includevariables = true) {
-		processInstanceIds.collectEntries({ [it.activitiId, getPIOpenTasks(it.activitiId, includevariables)] })
+	def getPIOpenTasks(List processInstanceIds) {
+		processInstanceIds.collectEntries({ [it.id, getPIOpenTasks(it.id)] })
 	}
 	
 	def getActiveActivities(List processInstanceIds) {
 		processInstanceIds.collectEntries({
 			def exs = runtimeService.createExecutionQuery().processInstanceId(it.activitiId).list()
 			def acts = exs.collect({historyService.createHistoricActivityInstanceQuery().executionId(it.id).unfinished().list()}).flatten().unique({it.id})
-			[it.activitiId, acts] 
+			[it.id, acts]
 		})
 	}
 	
@@ -377,11 +363,8 @@ class WorkflowService {
 		q.singleResult()
 	}
 	
-	def getTaskById(String taskId, inlcudeprocessvariables = true) {
-		def q = taskService.createTaskQuery().taskId(taskId)
-		if (inlcudeprocessvariables)
-			q = q.includeProcessVariables()
-		q.singleResult()
+	def getTaskById(String taskId) {
+		taskService.createTaskQuery().taskId(taskId).singleResult()
 	}
 	
 	def claimTask(String taskId, String username) {
@@ -389,12 +372,39 @@ class WorkflowService {
 	}		
 	
 	def completeTask(String taskId, Map params) {
-		//String executionId = taskService.createTaskQuery().taskId(taskId).singleResult().executionId
-		//setIdAndDomainClassName(executionId, params)
-		//runtimeService.setVariable(executionId, "uri", null)
 		taskService.setVariablesLocal(taskId, params)
 		taskService.complete(taskId, params)
-	}	
+	}
+
+
+    def getTotalProcessInfo(processInstanceId) {
+
+        def tasks = getPITasks(processInstanceId).collectEntries({[it.id, it]})
+
+        def activities = getActivities(processInstanceId).collectEntries({[it.id, it]})
+
+        def fullHist = (activities*.value.collectEntries({[it.taskId?:it.id, it]}) + tasks).values().sort {
+            it.startTime
+        }
+
+        def fullHistNoSubProcesses = fullHist.grep {
+            it.hasProperty('taskDefinitionKey') || it.activityType != 'subProcess' // is task or not is subprocess === is not subprocess
+        }
+
+        def processInstance = getProcessInstance(processInstanceId)
+        println "PROCESS INSTANCE: $processInstance"
+        println "HISTORIC ACTIVITIES: ${activities*.value*.activityId}"
+        println "HISTORIC TASKS: ${tasks*.value*.name}"
+
+        def totals = [
+                startTime: fullHist ? fullHist[0].startTime : null,
+                endTime: fullHist ? fullHist[-1].endTime : null,
+                cumulativeDurationInMillis: fullHistNoSubProcesses*.durationInMillis?.grep({it}).sum() ?:0,
+                durationInMillis: fullHist ? (fullHist[-1].endTime?:new Date()).time - fullHist[0].startTime.time : null
+        ]
+
+        [historic: fullHist, totals: totals, activities: activities, tasks: tasks]
+    }
 
 	def setAssignee(String taskId, String username) {
 		taskService.setAssignee(taskId, username)
@@ -447,5 +457,6 @@ class WorkflowService {
 		oldGroups.each { group -> identityService.deleteMembership(userId, group) }
 		
 	}
+
 
 }

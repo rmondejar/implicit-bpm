@@ -48,6 +48,7 @@ grails.project.dependency.resolution = {
 			exclude 'org.aspectj:aspectjrt'
 		}
 		runtime("org.aspectj:aspectjrt:1.7.4")
+        compile "commons-codec:commons-codec:1.6"
     }
 
     plugins {
@@ -56,6 +57,6 @@ grails.project.dependency.resolution = {
         runtime ":resources:1.1.6"
         build ":tomcat:$grailsVersion"
         compile ':cache:1.0.1'
-		compile ':implicit-bpm:0.2-SNAPSHOT'
+		compile ':implicit-bpm:0.3-SNAPSHOT'
     }
 }

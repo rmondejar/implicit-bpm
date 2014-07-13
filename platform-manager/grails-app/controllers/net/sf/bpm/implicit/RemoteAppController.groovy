@@ -1,9 +1,8 @@
 package net.sf.bpm.implicit
 
-import grails.converters.JSON
-
 import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
+import grails.converters.JSON
 
 @Transactional(readOnly = true)
 class RemoteAppController {
@@ -35,14 +34,11 @@ class RemoteAppController {
             return
         }
 
-        def app = remoteAppInstance.save(flush: true)
-
+        remoteAppInstance.save flush:true
 
         request.withFormat {
             form multipartForm {
-                flash.message = message(code: 'default.created.message', 
-                        args: [message(code: 'remoteApp.label', default: 'RemoteApp'), 
-                               remoteAppInstance.id])
+                flash.message = message(code: 'default.created.message', args: [message(code: 'remoteApp.label', default: 'RemoteApp'), remoteAppInstance.id])
                 redirect remoteAppInstance
             }
             '*' { respond remoteAppInstance, [status: CREATED] }
@@ -105,17 +101,36 @@ class RemoteAppController {
         }
     }
 
-    //MORE REST METHOD
-
     def sync() {
 
         println "SYNC $params"
-        def r = RemoteApp.findByName(params.name)
-        if (!r) {
-            r = new RemoteApp(params)
-            r = r.save(flush: true)
-            if (!r) r = [:]
+
+        Map resp = [:]
+
+        if (!params.name || !params.location) {
+            resp.error = "params"
+            render resp as JSON
+            return
         }
-        render r as JSON
+        if (!params.metadata) params.metadata = "{}"
+
+        RemoteApp app = RemoteApp.findByName(params.name)
+        if (!app) {
+            app = new RemoteApp(params)
+            resp.isNew = true
+        }
+        else {
+            app.location = params.location
+            app.metadata = params.metadata
+            resp.isUpdated = true
+        }
+
+        if (!app.save(flush: true)) {
+            resp.error = "onSave"
+            println app.errors
+        }
+        println resp
+        render resp as JSON
     }
+
 }

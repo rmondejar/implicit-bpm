@@ -1,59 +1,46 @@
 <!doctype html>
-<!--[if lt IE 7 ]> <html lang="en" class="no-js ie6"> <![endif]-->
-<!--[if IE 7 ]>    <html lang="en" class="no-js ie7"> <![endif]-->
-<!--[if IE 8 ]>    <html lang="en" class="no-js ie8"> <![endif]-->
-<!--[if IE 9 ]>    <html lang="en" class="no-js ie9"> <![endif]-->
-<!--[if (gt IE 9)|!(IE)]><!-->
-<html lang="en" class="no-js">
-<!--<![endif]-->
+
+<html lang="en">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-<title><g:layoutTitle default="Platform Manager" /></title>
+<title><g:layoutTitle default="${ grailsApplication.config.appName }" /></title> 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="shortcut icon"
-	href="${resource(dir: 'images', file: 'favicon.ico')}"
-	type="image/x-icon">
+<link rel="shortcut icon" href="${resource(dir: 'images', file: 'favicon.ico')}" type="image/x-icon">
 
 <g:layoutHead />
-<r:require modules="jquery, bootstrap" />
+<r:require modules="jquery, ace" />
 <r:layoutResources />
-<link rel="stylesheet" href="${resource(dir: 'css', file: 'main.css')}"
-	type="text/css">
-<link rel="stylesheet"
-	href="${resource(dir: 'css', file: 'mobile.css')}" type="text/css">
 </head>
-<body>
-	<div class="container">
-		<div id="header">
-			<div id="logo" role="banner">
-				<a href="http://implicit-bpm.sf.net"><img
-					src="${resource(dir: 'images', file: 'logo.png')}"
-					alt="Implict BPM" /></a>
-				<p style="font-size: 2em;font-family: Times New Roman">Platform Manager</p>
-			</div>
-			<div id="area-cont">
-			
-				<div id="area">
-					<span>Demo mode activated</span>
-				
-				</div>
-		
-			</div>
-			
-		</div>
-		<div class="content-body">			
-			<g:layoutBody />
-		</div>
-		<div class="footer" role="contentinfo">
-			<p>Implicit BPM Back-End Instance</p>
-		</div>
+<body class="navbar-fixed">
+    <g:render template="/shared/navbar"/>
+    
+    <div class="main-container" id="main-container">
+		<div class="main-container-inner">
+			<a class="menu-toggler" id="menu-toggler" href="#"><span class="menu-text"></span></a>
+         	
+         	<g:render template="/shared/sidebar"/>
+         	      	       				         					
+		 	<div class="main-content">
+				<div class="page-content">
+              		 <g:layoutBody />
+            	</div>        	
+         	</div> 
+		</div> 
 	</div>
+<g:javascript>
+    var APP_TITLE = "Manager";
 
-	<div id="spinner" class="spinner" style="display: none;">
-		<g:message code="spinner.alt" default="Loading&hellip;" />
-	</div>
-	<g:javascript library="application" />
+    $('.sidebar-collapse').on('click', function() {
+      var title = $('#app-title').html();
+      if (title == APP_TITLE) {
+        $('#app-title').html('&nbsp;');
+      }
+      else {
+        $('#app-title').html(APP_TITLE);
+      }
+    });
+</g:javascript>
 	<r:layoutResources />
 </body>
 </html>
