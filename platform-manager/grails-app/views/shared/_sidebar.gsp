@@ -2,8 +2,7 @@
 	<ul class="nav nav-list">
 		<li class="sidebar-app-title sidebar-appsti" id="app-title">Manager</li>
 		<li><a href="${createLink(uri: '/')}"><i class="glyphicon-home"></i> <span class="menu-text"><g:message code="default.home.label" /></span></a></li>
-		<li><g:link controller="remoteApp" action="index"><i class="glyphicon-user"></i> <span class="menu-text">Applications</span></g:link></li>
-        <li><g:link controller="remoteApp" action="index"><i class="glyphicon-cloud"></i> <span class="menu-text">Applications</span></g:link></li>
+		<li><g:link controller="remoteApp" action="index"><i class="glyphicon-cloud"></i> <span class="menu-text">Applications</span></g:link></li>
 		%{--<li><g:link controller="prova2" action="index"><i class="icon-plus-sign"></i> <span class="menu-text">Prova2</span></g:link></li>
 		<li>
 			<a href="#" class="dropdown-toggle">

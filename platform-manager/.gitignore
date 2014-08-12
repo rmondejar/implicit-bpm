@@ -40,6 +40,5 @@
 /target
 
 # other
-*.iws
-*.i*
+/*.i*
 /projectFilesBackup*/

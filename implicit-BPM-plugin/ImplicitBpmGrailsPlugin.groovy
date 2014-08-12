@@ -50,12 +50,12 @@ class ImplicitBpmGrailsPlugin {
 		}
 		println 'Configuring Grails Implicit BPM...'		
 
-		ImplicitBpmConfigFactory(ImplicitBpmConfigFactory) {
-			ImplicitBpmConfig = conf
+		implicitBpmConfigFactory(ImplicitBpmConfigFactory) {
+			implicitBpmConfig = conf
 		}
 
-		ImplicitBpmListener(ImplicitBpmListener) {
-			configFactory = ref('ImplicitBpmConfigFactory')
+		implicitBpmListener(ImplicitBpmListener) {
+			configFactory = ref('implicitBpmConfigFactory')
 		}
 
 	}

@@ -14,6 +14,10 @@ class RemoteAppController {
         respond RemoteApp.list(params), model:[remoteAppInstanceCount: RemoteApp.count()]
     }
 
+    def list(Integer max) {
+        redirect(action: "index", params: [max: max])
+    }
+
     def show(RemoteApp remoteAppInstance) {
         respond remoteAppInstance
     }

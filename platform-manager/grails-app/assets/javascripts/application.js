@@ -1,20 +1,30 @@
-// This is a manifest file that'll be compiled into application.js.
-//
-// Any JavaScript file within this directory can be referenced here using a relative path.
-//
-// You're free to add application-wide JavaScript to this file, but it's generally better 
-// to create separate JavaScript files as needed.
-//
 //= require jquery
 //= require_tree .
 //= require_self
 
 if (typeof jQuery !== 'undefined') {
-	(function($) {
-		$('#spinner').ajaxStart(function() {
+	(function ($) {
+		$('#spinner,.spinner').ajaxStart(function () {
 			$(this).fadeIn();
-		}).ajaxStop(function() {
+		}).ajaxStop(function () {
 			$(this).fadeOut();
 		});
 	})(jQuery);
 }
+
+// Activació automàtica dels tabs actius per les vistes
+$(document).ready(function () {
+	if (location.hash !== '') $('a[href="' + location.hash + '"]').tab('show');
+	$('a[data-toggle="tab"]').on('shown', function (e) {
+		return location.hash = $(e.target).attr('href').substr(1);
+	});
+
+	// activació dels inputs datepicker
+	$('.datepicker').datepicker({format: 'dd/mm/yyyy', weekStart: 1, language: 'ca', autoclose: true});
+
+	$('*[title]:not([data-toggle])').addClass('tooltiped');
+	$('*[data-toggle=popover]').popover();
+	$('*[data-toggle=tooltip], .tooltiped').tooltip({container: 'body'});
+
+
+});
