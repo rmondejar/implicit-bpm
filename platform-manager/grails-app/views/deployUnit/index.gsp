@@ -25,9 +25,9 @@
         <thead>
         <tr>
             
-            <g:sortableColumn property="deployedProcess" title="${message(code: 'deployUnit.processName.label', default: 'Deployed Process')}" />
+            <g:sortableColumn property="processName" title="${message(code: 'deployUnit.processName.label', default: 'Process Name')}" />
             
-            <g:sortableColumn property="processOk" title="${message(code: 'deployUnit.deployed.label', default: 'Process Ok')}" />
+            <g:sortableColumn property="deployed" title="${message(code: 'deployUnit.deployed.label', default: 'Deployed')}" />
             
             <g:sortableColumn property="running" title="${message(code: 'deployUnit.running.label', default: 'Running')}" />
 
@@ -39,7 +39,7 @@
                 
                 <td><g:link action="show" id="${deployUnitInstance.id}">${fieldValue(bean: deployUnitInstance, field: "processName")}</g:link></td>
                 
-                <td><g:formatBoolean boolean="${deployUnitInstance.processOk}" /></td>
+                <td><g:formatBoolean boolean="${deployUnitInstance.deployed}" /></td>
                 
                 <td><g:formatBoolean boolean="${deployUnitInstance.running}" /></td>
 

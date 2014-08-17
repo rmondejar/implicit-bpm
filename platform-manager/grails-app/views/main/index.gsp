@@ -11,44 +11,48 @@
 </div>
 
 <div id="list-deployUnit" class="content scaffold-list" role="main">
-    <g:if test="${!deployUnitInstanceList?:deployUnitInstanceList.empty}">
+    <g:if test="${deployUnitInstanceCount==0}">
         <div class="alert alert-${flash.messagetype?:'info'} message" role="status"><button data-dismiss="alert" class="close" type="button">×</button>No Deployment Units Performed Yet...</div>
     </g:if>
     <g:else>
-    <table class="table table-striped table-bordered">
-        <thead>
-        <tr>
 
-            <g:sortableColumn property="deployedProcess" title="${message(code: 'deployUnit.processName.label', default: 'Deployed Process')}" />
+        <span class="label label-lg label-info arrowed">Deploy Units</span>
+        <table class="table table-striped table-bordered">
+            <thead>
+            <tr>
 
-            <g:sortableColumn property="processOk" title="${message(code: 'deployUnit.deployed.label', default: 'Process Ok')}" />
+                <g:sortableColumn property="processName" title="${message(code: 'deployUnit.processName.label', default: 'Process Name')}" />
 
-            <g:sortableColumn property="running" title="${message(code: 'deployUnit.running.label', default: 'Running')}" />
+                <g:sortableColumn property="deployed" title="${message(code: 'deployUnit.deployed.label', default: 'Deployed')}" />
 
-        </tr>
-        </thead>
-        <tbody>
-        <g:each in="${deployUnitInstanceList}" status="i" var="deployUnitInstance">
-            <tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
-
-                <td><g:link action="show" id="${deployUnitInstance.id}">${fieldValue(bean: deployUnitInstance, field: "processName")}</g:link></td>
-
-                <td><g:formatBoolean boolean="${deployUnitInstance.processOk}" /></td>
-
-                <td><g:formatBoolean boolean="${deployUnitInstance.running}" /></td>
+                <g:sortableColumn property="running" title="${message(code: 'deployUnit.running.label', default: 'Running')}" />
 
             </tr>
-        </g:each>
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+            <g:each in="${deployUnitInstanceList}" status="i" var="deployUnitInstance">
+                <tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
+
+                    <td><g:link controller="deployUnit" action="show" id="${deployUnitInstance.id}">${fieldValue(bean: deployUnitInstance, field: "processName")}</g:link></td>
+
+                    <td><g:formatBoolean boolean="${deployUnitInstance.deployed}" /></td>
+
+                    <td><g:formatBoolean boolean="${deployUnitInstance.running}" /></td>
+
+                </tr>
+            </g:each>
+            </tbody>
+        </table>
     </g:else>
 </div>
 
 <div id="list-remoteApp" class="content scaffold-list" role="main">
-    <g:if test="${!remoteAppInstanceList?:remoteAppInstanceList.empty}">
+    <g:if test="${remoteAppInstanceCount==0}">
         <div class="alert alert-${flash.messagetype?:'info'} message" role="status"><button data-dismiss="alert" class="close" type="button">×</button>No Remote Apps Synchronized Yet...</div>
     </g:if>
     <g:else>
+        <span class="label label-lg label-info arrowed">Remote Apps</span>
+
     <table class="table table-striped table-bordered">
         <thead>
         <tr>
@@ -63,7 +67,7 @@
         <g:each in="${remoteAppInstanceList}" status="i" var="remoteAppInstance">
             <tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
 
-                <td><g:link action="show" id="${remoteAppInstance.id}">${fieldValue(bean: remoteAppInstance, field: "name")}</g:link></td>
+                <td><g:link controller="remoteApp" action="show" id="${remoteAppInstance.id}">${fieldValue(bean: remoteAppInstance, field: "name")}</g:link></td>
 
                 <td>${fieldValue(bean: remoteAppInstance, field: "location")}</td>
 

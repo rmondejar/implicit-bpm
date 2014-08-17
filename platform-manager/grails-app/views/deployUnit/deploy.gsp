@@ -18,12 +18,19 @@
     <g:uploadForm action="upload">
     <div class="form-horizontal">
         <fieldset>
-            <div class="widget-body">
+            <input type="file" name="bpmn20.xml">
+              <div class="widget-body">
                 <div class="widget-main">
-                    <input type="file" name="bpmn20.xml" />
+                    <div class="form-group">
+                        <div class="col-xs-12">
+                            <label class="ace-file-input"><input type="file" name="bpmn20.xml" id="id-input-file-2">
+                                <span class="ace-file-container" data-title="Choose"><span class="ace-file-name" data-title="No File ...">
+                                    <i class=" ace-icon fa fa-upload"></i></span></span><a class="remove" href="#"><i class=" ace-icon fa fa-times"></i></a>
+                            </label>
+                        </div>
+                    </div>
                 </div>
             </div>
-
         </fieldset>
     </div>
 

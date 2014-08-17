@@ -10,6 +10,7 @@ class MainController {
         def apps = RemoteApp.list()
         int numApps = RemoteApp.count()
 
-        respond model: [deployUnitInstanceList: units, deployUnitInstanceCount: numUnits, remoteAppInstanceList: apps, remoteAppInstanceCount: numApps]
+        [deployUnitInstanceList: units, deployUnitInstanceCount: numUnits,
+         remoteAppInstanceList: apps, remoteAppInstanceCount: numApps]
 	}
 }
