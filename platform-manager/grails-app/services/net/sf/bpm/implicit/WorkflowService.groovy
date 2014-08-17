@@ -2,6 +2,8 @@ package net.sf.bpm.implicit
 
 import grails.transaction.Transactional
 import grails.util.GrailsNameUtils
+import org.camunda.bpm.engine.impl.persistence.entity.DeploymentEntity
+import org.camunda.bpm.engine.impl.persistence.entity.ProcessDefinitionEntity
 import org.camunda.bpm.engine.repository.ProcessDefinition
 import org.camunda.bpm.engine.runtime.ProcessInstance
 import org.camunda.bpm.engine.task.Task
@@ -25,16 +27,28 @@ class WorkflowService {
     }
 
     def deployProcess(fileContent, fileName) {
-/*        def r = new File("grails-app/processes/my/test/SimpleProcess2.xml")
-        String xml = "";
-        r.eachLine {
-            xml += it
-        }*/
 
-        def d = repositoryService.createDeployment()
+        String processName = fileName
+        int version = 0
+        int revision = 0
+
+        DeploymentEntity d = (DeploymentEntity) repositoryService.createDeployment()
                 .name(fileName.toString())
-                .addString(fileName + ".bpmn20.xml", fileContent)
+                .addString(processName + ".bpmn20.xml", fileContent)
                 .deploy()
+
+
+        if (d) {
+            ProcessDefinitionEntity pde = d.getDeployedArtifacts(ProcessDefinitionEntity).first()
+            //println "PDE : ${pde.dump()}"
+            if (pde) {
+                processName = pde.name
+                version = pde.version
+                revision = pde.revision
+            }
+        }
+
+        [object:d, name:processName, version:version, revision:revision]
 
     }
 

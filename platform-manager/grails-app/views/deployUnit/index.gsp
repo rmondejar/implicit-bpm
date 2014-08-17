@@ -25,28 +25,24 @@
         <thead>
         <tr>
             
-            <g:sortableColumn property="deployedProcess" title="${message(code: 'deployUnit.deployedProcess.label', default: 'Deployed Process')}" />
+            <g:sortableColumn property="deployedProcess" title="${message(code: 'deployUnit.processName.label', default: 'Deployed Process')}" />
             
-            <g:sortableColumn property="processOk" title="${message(code: 'deployUnit.processOk.label', default: 'Process Ok')}" />
+            <g:sortableColumn property="processOk" title="${message(code: 'deployUnit.deployed.label', default: 'Process Ok')}" />
             
             <g:sortableColumn property="running" title="${message(code: 'deployUnit.running.label', default: 'Running')}" />
-            
-            <g:sortableColumn property="weaverDsl" title="${message(code: 'deployUnit.weaverDsl.label', default: 'Weaver Dsl')}" />
-            
+
         </tr>
         </thead>
         <tbody>
         <g:each in="${deployUnitInstanceList}" status="i" var="deployUnitInstance">
             <tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
                 
-                <td><g:link action="show" id="${deployUnitInstance.id}">${fieldValue(bean: deployUnitInstance, field: "deployedProcess")}</g:link></td>
+                <td><g:link action="show" id="${deployUnitInstance.id}">${fieldValue(bean: deployUnitInstance, field: "processName")}</g:link></td>
                 
                 <td><g:formatBoolean boolean="${deployUnitInstance.processOk}" /></td>
                 
                 <td><g:formatBoolean boolean="${deployUnitInstance.running}" /></td>
-                
-                <td>${fieldValue(bean: deployUnitInstance, field: "weaverDsl")}</td>
-                
+
             </tr>
         </g:each>
         </tbody>

@@ -19,57 +19,35 @@
 	padding-left: 13px !important;
 }
 
-.sidebar-acces {
-	color: #fff;
-	background: #B61244 !important;
-	background-image: -webkit-gradient(linear, left 0%, left 100%, from(#cd6887), to(#b61244)) !important;
-	background-image: -webkit-linear-gradient(top, #cd6887 0%, #B61244 100%) !important;
-	background-image: -moz-linear-gradient(top, #cd6887 0%, #B61244 100%) !important;
-	background-image: linear-gradient(to bottom, #cd6887 0%, #B61244 100%) !important;
-	background-repeat: repeat-x !important;
-	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#cd6887', endColorstr='#B61244', GradientType=0) !important;
-}
-
-.sidebar-appsti {
+.sidebar-manager {
 	color: #fff;
 	background: #DC5C3D !important;
-	background-image: -webkit-gradient(linear, left 0%, left 100%, from(#e59683), to(#dc5c3d)) !important;
-	background-image: -webkit-linear-gradient(top, #e59683 0%, #dc5c3d 100%) !important;
-	background-image: -moz-linear-gradient(top, #e59683 0%, #dc5c3d 100%) !important;
-	background-image: linear-gradient(to bottom, #e59683 0%, #dc5c3d 100%) !important;
+	/*background-image: -webkit-gradient(linear, left 0%, left 100%, from(#e59683), to(#dc5c3d)) !important;*/
+	/*background-image: -webkit-linear-gradient(top, #e59683 0%, #dc5c3d 100%) !important;*/
+	/*background-image: -moz-linear-gradient(top, #e59683 0%, #dc5c3d 100%) !important;*/
+	/*background-image: linear-gradient(to bottom, #e59683 0%, #dc5c3d 100%) !important;*/
 	background-repeat: repeat-x !important;
 	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#e59683', endColorstr='#dc5c3d', GradientType=0) !important;
 }
 
-.sidebar-revisio {
+.sidebar-app1 {
 	color: rgba(0, 0, 0, 0.66) !important;
 	background: #4ACFF5 !important;
-	background-image: -webkit-gradient(linear, left 0%, left 100%, from(#aee4f3), to(#4ACFF5)) !important;
-	background-image: -webkit-linear-gradient(top, #aee4f3 0%, #4ACFF5 100%) !important;
-	background-image: -moz-linear-gradient(top, #aee4f3 0%, #4ACFF5 100%) !important;
-	background-image: linear-gradient(to bottom, #aee4f3 0%, #4ACFF5 100%) !important;
+	/*background-image: -webkit-gradient(linear, left 0%, left 100%, from(#aee4f3), to(#4ACFF5)) !important;*/
+	/*background-image: -webkit-linear-gradient(top, #aee4f3 0%, #4ACFF5 100%) !important;*/
+	/*background-image: -moz-linear-gradient(top, #aee4f3 0%, #4ACFF5 100%) !important;*/
+	/*background-image: linear-gradient(to bottom, #aee4f3 0%, #4ACFF5 100%) !important;*/
 	background-repeat: repeat-x !important;
 	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#aee4f3', endColorstr='#4ACFF5', GradientType=0) !important;
 }
 
-.sidebar-procs {
-	color: #996633 !important;
-	background: #F5CE66 !important;
-	background-image: -webkit-gradient(linear, left 0%, left 100%, from(#f3e3b5), to(#F5CE66)) !important;
-	background-image: -webkit-linear-gradient(top, #f3e3b5 0%, #F5CE66 100%) !important;
-	background-image: -moz-linear-gradient(top, #f3e3b5 0%, #F5CE66 100%) !important;
-	background-image: linear-gradient(to bottom, #f3e3b5 0%, #F5CE66 100%) !important;
-	background-repeat: repeat-x !important;
-	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#f3e3b5', endColorstr='#F5CE66', GradientType=0) !important;
-}
-
-.sidebar-sgd {
+.sidebar-app2 {
 	color: rgba(0, 0, 0, 0.66) !important;
 	background: #96CD0D !important;
-	background-image: -webkit-gradient(linear, left 0%, left 100%, from(#cde395), to(#96CD0D)) !important;
-	background-image: -webkit-linear-gradient(top, #cde395 0%, #96CD0D 100%) !important;
-	background-image: -moz-linear-gradient(top, #cde395 0%, #96CD0D 100%) !important;
-	background-image: linear-gradient(to bottom, #cde395 0%, #96CD0D 100%) !important;
+	/*background-image: -webkit-gradient(linear, left 0%, left 100%, from(#cde395), to(#96CD0D)) !important;*/
+	/*background-image: -webkit-linear-gradient(top, #cde395 0%, #96CD0D 100%) !important;*/
+	/*background-image: -moz-linear-gradient(top, #cde395 0%, #96CD0D 100%) !important;*/
+	/*background-image: linear-gradient(to bottom, #cde395 0%, #96CD0D 100%) !important;*/
 	background-repeat: repeat-x !important;
 	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#cde395', endColorstr='#96CD0D', GradientType=0) !important;
 }

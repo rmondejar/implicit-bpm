@@ -1,39 +1,13 @@
 <%@ page import="net.sf.bpm.implicit.DeployUnit" %>
 
 
-
-
-<div class="control-group ${hasErrors(bean: deployUnitInstance, field: 'deployedProcess', 'error')}  col-xs-12">
-    <label class="control-label" for="deployedProcess">
-        <g:message code="deployUnit.deployedProcess.label" default="Deployed Process" />
+<div class="control-group ${hasErrors(bean: deployUnitInstance, field: 'processName', 'error')}  col-xs-12">
+    <label class="control-label" for="processName">
+        <g:message code="deployUnit.processName.label" default="Process Name" />
         
     </label>
     <div class="controls">
-        <g:textField name="deployedProcess" required="" value="${deployUnitInstance?.deployedProcess}"/>
-
-    </div>
-</div>
-
-
-<div class="control-group ${hasErrors(bean: deployUnitInstance, field: 'processOk', 'error')}  col-xs-12">
-    <label class="control-label" for="processOk">
-        <g:message code="deployUnit.processOk.label" default="Process Ok" />
-        
-    </label>
-    <div class="controls">
-        <g:checkBox name="processOk" value="${deployUnitInstance?.processOk}" />
-
-    </div>
-</div>
-
-
-<div class="control-group ${hasErrors(bean: deployUnitInstance, field: 'running', 'error')}  col-xs-12">
-    <label class="control-label" for="running">
-        <g:message code="deployUnit.running.label" default="Running" />
-        
-    </label>
-    <div class="controls">
-        <g:checkBox name="running" value="${deployUnitInstance?.running}" />
+        <g:textField name="processName" required="" value="${deployUnitInstance?.processName}"/>
 
     </div>
 </div>
@@ -45,7 +19,7 @@
         
     </label>
     <div class="controls">
-        <g:textField name="weaverDsl" required="" value="${deployUnitInstance?.weaverDsl}"/>
+        <g:textArea name="weaverDsl" cols="40" rows="5" maxlength="2000" value="${remoteAppInstance?.metadata}"/>
 
     </div>
 </div>

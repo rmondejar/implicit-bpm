@@ -28,9 +28,7 @@
             <g:sortableColumn property="name" title="${message(code: 'remoteApp.name.label', default: 'Name')}" />
             
             <g:sortableColumn property="location" title="${message(code: 'remoteApp.location.label', default: 'Location')}" />
-            
-            <g:sortableColumn property="metadata" title="${message(code: 'remoteApp.metadata.label', default: 'Metadata')}" />
-            
+
         </tr>
         </thead>
         <tbody>
@@ -40,9 +38,7 @@
                 <td><g:link action="show" id="${remoteAppInstance.id}">${fieldValue(bean: remoteAppInstance, field: "name")}</g:link></td>
                 
                 <td>${fieldValue(bean: remoteAppInstance, field: "location")}</td>
-                
-                <td>${fieldValue(bean: remoteAppInstance, field: "metadata")}</td>
-                
+
             </tr>
         </g:each>
         </tbody>

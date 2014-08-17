@@ -15,6 +15,6 @@ class RemoteApp {
 		
 		name size: 3..100, blank: false, unique: true
         location url: "localhost(:(\\d{1,5}))?", blank: false
-        metadata size:1..2000, blank: false
+        metadata size:1..2000, nullable: true, blank: true
     }
 }

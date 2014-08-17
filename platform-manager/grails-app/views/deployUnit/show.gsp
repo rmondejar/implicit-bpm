@@ -28,8 +28,12 @@
         <div class="form-actions">
             <g:hiddenField name="id" value="${deployUnitInstance?.id}" />
             <g:link class="edit btn btn-sm btn-primary" action="edit" id="${deployUnitInstance?.id}">
-                <i class="icon-trash icon-pencil"></i>
+                <i class="icon-pencil"></i>
                 <g:message code="default.button.edit.label" default="Edit" />
+            </g:link>
+            <g:link class="edit btn btn-sm btn-purple" action="deploy" id="${deployUnitInstance?.id}">
+                <i class="icon-cloud-upload"></i>
+                <g:message code="default.button.deploy.label" default="Deploy" />
             </g:link>
             <button type="submit" name="_action_delete" class="btn btn-sm btn-danger delete" formnovalidate="" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');">
                 <i class="icon-trash icon-white"></i>
