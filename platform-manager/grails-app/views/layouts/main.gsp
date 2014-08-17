@@ -9,9 +9,7 @@
     <link rel="shortcut icon" href="${resource(dir: 'images', file: 'favicon.ico')}" type="image/x-icon">
 
     <asset:javascript src="application.js"/>
-
     <asset:stylesheet href="application.css"/>
-
     <asset:link rel="shortcut icon" href="favicon.ico" type="image/x-icon"/>
 
     <g:layoutHead/>

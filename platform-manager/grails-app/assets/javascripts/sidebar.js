@@ -1,4 +1,4 @@
-var APP_TITLE = "Manager";
+var APP_TITLE = "Blank App";
 
 $('.sidebar-collapse').on('click', function () {
 	var title = $('#app-title').html();
