@@ -1,6 +1,10 @@
 package net.sf.bpm.implicit
 
+import grails.converters.JSON
+import org.codehaus.groovy.grails.commons.GrailsClass
+
 class MainController {
+
 
     def index() {
 
@@ -13,4 +17,5 @@ class MainController {
         [deployUnitInstanceList: units, deployUnitInstanceCount: numUnits,
          remoteAppInstanceList: apps, remoteAppInstanceCount: numApps]
 	}
+
 }

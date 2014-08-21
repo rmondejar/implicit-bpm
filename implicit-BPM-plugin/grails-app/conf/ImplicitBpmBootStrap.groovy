@@ -11,6 +11,7 @@ class ImplicitBpmBootStrap {
             println "Application successful synchronized"
         } catch(e) {
             println "ERROR: platform manager is not available"
+            e.printStackTrace()
         }
     }
     def destroy = {

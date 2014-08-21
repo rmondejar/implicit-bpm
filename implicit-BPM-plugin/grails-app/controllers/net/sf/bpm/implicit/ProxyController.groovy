@@ -6,6 +6,8 @@ class ProxyController {
 
     static allowedMethods = [ping: "GET", inject: "PUT", disable: "DELETE"]
 
+    def platformService
+
     def ping() {
 
         Map resp = [:]
@@ -17,7 +19,7 @@ class ProxyController {
 
         Map resp = [:]
 
-        println "INJECT $params"
+  //      println "INJECT $params"
         if (!params.weaver) {
             resp.error = "params"
             render resp as JSON
@@ -27,7 +29,7 @@ class ProxyController {
 //            resp.error = "onAdd"
 //            println weaver.errors
 //        }
-        println resp
+//        println resp
         render resp as JSON
     }
 
@@ -35,7 +37,7 @@ class ProxyController {
 
         Map resp = [:]
 
-        println "DISABLE $params"
+//        println "DISABLE $params"
         if (!params.weaver) {
             resp.error = "params"
             render resp as JSON
@@ -45,7 +47,12 @@ class ProxyController {
 //            resp.error = "onAdd"
 //            println weaver.errors
 //        }
-        println resp
+//        println resp
         render resp as JSON
+    }
+
+    def sync() {
+
+        platformService.sync()
     }
 }

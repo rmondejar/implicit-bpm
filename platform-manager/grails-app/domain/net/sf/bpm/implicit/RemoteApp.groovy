@@ -4,6 +4,9 @@ class RemoteApp {
 	
 	String name
 	String location
+    boolean isWarMode
+    String version
+    String framework
 	String metadata //JSON
 	
 	static mapping = {
@@ -15,6 +18,8 @@ class RemoteApp {
 		
 		name size: 3..100, blank: false, unique: true
         location url: "localhost(:(\\d{1,5}))?", blank: false
-        metadata size:1..2000, nullable: true, blank: true
+        version size: 1..15, blank: true, nullable: true
+        framework size: 1..30, blank: true, nullable: true
+        metadata size:1..3000, nullable: true, blank: true
     }
 }

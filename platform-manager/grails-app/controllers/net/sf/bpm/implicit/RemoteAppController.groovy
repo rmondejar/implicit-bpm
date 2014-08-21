@@ -125,6 +125,9 @@ class RemoteAppController {
         }
         else {
             app.location = params.location
+            app.isWarMode = params.isWarMode
+            app.version = params.version
+            app.framework = params.framework
             app.metadata = params.metadata
             resp.isUpdated = true
         }

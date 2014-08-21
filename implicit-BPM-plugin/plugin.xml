@@ -1,4 +1,4 @@
-<plugin name='implicit-bpm' version='0.3-SNAPSHOT' grailsVersion='2.2 &gt; *'>
+<plugin name='implicit-bpm' version='0.4-SNAPSHOT' grailsVersion='2.2 &gt; *'>
   <author>Ruben Mondejar</author>
   <authorEmail>ruben.mondejar@urv.cat</authorEmail>
   <title>Grails Implicit BPM Plugin</title>
@@ -9,7 +9,8 @@
     <resource>DefaultImplicitBpmConfig</resource>
     <resource>ImplicitBpmBootStrap</resource>
     <resource>net.sf.bpm.implicit.ProxyController</resource>
-    <resource>implicit.PlatformService</resource>
+    <resource>net.sf.bpm.implicit.PlatformService</resource>
+    <resource>net.sf.bpm.implicit.ReflectionService</resource>
   </resources>
   <repositories>
     <repository name='grailsCentral' url='http://grails.org/plugins' />

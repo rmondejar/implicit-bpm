@@ -15,36 +15,31 @@
     <g:if test="${flash.message}">
         <div class="alert alert-${flash.messagetype?:'info'} message" role="status"><button data-dismiss="alert" class="close" type="button">×</button>${flash.message}</div>
     </g:if>
-    <g:uploadForm action="upload">
+
     <div class="form-horizontal">
-        <fieldset>
-            <input type="file" name="bpmn20.xml">
-              <div class="widget-body">
-                <div class="widget-main">
-                    <div class="form-group">
-                        <div class="col-xs-12">
-                            <label class="ace-file-input"><input type="file" name="bpmn20.xml" id="id-input-file-2">
-                                <span class="ace-file-container" data-title="Choose"><span class="ace-file-name" data-title="No File ...">
-                                    <i class=" ace-icon fa fa-upload"></i></span></span><a class="remove" href="#"><i class=" ace-icon fa fa-times"></i></a>
-                            </label>
+            <g:uploadForm action="upload" class="form-horizontal">
+                <fieldset class="form">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class="control-label col-sm-3" for="file">BPMN XML: </label>
+                            <div class="col-sm-9"><input type="file" id="file" name="bpmn20.xml" required="" class="form-control"/></div>
                         </div>
                     </div>
+                </fieldset>
+                <div class="form-actions">
+                    <g:hiddenField name="id" value="${deployUnitInstance?.id}" />
+                    <button type="submit" name="upload" class="btn btn-sm btn-success save">
+                        <i class="icon-ok"></i>
+                        ${message(code: 'default.button.accept.label', default: 'Accept')}
+                    </button>
+                    <button type="submit" name="_action_list" class="btn btn-sm">
+                        ${message(code: 'default.button.cancel.label', default: 'Cancel')}
+                    </button>
                 </div>
-            </div>
-        </fieldset>
+            </g:uploadForm>
     </div>
 
-        <div class="form-actions">
-            <g:hiddenField name="id" value="${deployUnitInstance?.id}" />
-                     <button type="submit" name="upload" class="btn btn-sm btn-success save">
-                <i class="icon-ok"></i>
-                ${message(code: 'default.button.accept.label', default: 'Accept')}
-            </button>
-            <button type="submit" name="_action_list" class="btn btn-sm">
-                ${message(code: 'default.button.cancel.label', default: 'Cancel')}
-            </button>
-        </div>
-    </g:uploadForm>
+
 </div>
 </body>
 </html>
