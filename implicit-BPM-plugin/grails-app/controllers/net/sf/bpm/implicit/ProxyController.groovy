@@ -6,12 +6,14 @@ class ProxyController {
 
     static allowedMethods = [ping: "GET", inject: "PUT", disable: "DELETE"]
 
+    def weaverService
     def platformService
+    def reflectionService
 
     def ping() {
 
-        Map resp = [:]
-        resp.isAlive = true
+        def resp = [:]
+        resp = reflectionService.appInstanceData
         render resp as JSON
     }
 
@@ -25,11 +27,13 @@ class ProxyController {
             render resp as JSON
             return
         }
-//        if (!weaver.save(flush: true)) {
-//            resp.error = "onAdd"
-//            println weaver.errors
-//        }
-//        println resp
+
+        Weaver weaver = weaverService.createWeaver(params.weaver)
+        if (!weaver.save(flush: true)) {
+            resp.error = "onAdd"
+            println weaver.errors
+        }
+        println resp
         render resp as JSON
     }
 
@@ -43,16 +47,21 @@ class ProxyController {
             render resp as JSON
             return
         }
-//        if (!weaver.save(flush: true)) {
-//            resp.error = "onAdd"
-//            println weaver.errors
-//        }
+
+        Weaver weaver = weaverService.getWeaver(params.weaver)
+
+       if (!weaver.delete(flush: true)) {
+            resp.error = "onDelete"
+            println weaver.errors
+        }
 //        println resp
         render resp as JSON
     }
 
     def sync() {
 
-        platformService.sync()
+        def resp = platformService.sync()
+
+        render resp as JSON
     }
 }

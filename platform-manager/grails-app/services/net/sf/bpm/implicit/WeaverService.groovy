@@ -4,7 +4,7 @@ import grails.plugins.rest.client.RestBuilder
 import grails.transaction.Transactional
 
 @Transactional
-class DslService {
+class WeaverService {
 
     def getApplications(String dsl, String weaverDsl) {
 

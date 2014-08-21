@@ -8,9 +8,9 @@
 
 <g:if test="${remoteAppInstance?.version}">
     <div class="control-group col-xs-12">
-        <label class="property-key"><g:message code="remoteApp.version.label" default="Version"/></label>
+        <label class="property-key"><g:message code="remoteApp.verNum.label" default="Version"/></label>
         <span class="property-value" aria-labelledby="location-label"><g:fieldValue bean="${remoteAppInstance}"
-                                                                                    field="version"/></span>
+                                                                                    field="verNum"/></span>
     </div>
 </g:if>
 
@@ -22,13 +22,12 @@
     </div>
 </g:if>
 
-<g:if test="${remoteAppInstance?.isWarMode}">
     <div class="control-group col-xs-12">
-        <label class="property-key"><g:message code="remoteApp.isWarMode.label" default="War Mode"/></label>
+        <label class="property-key"><g:message code="remoteApp.isWar.label" default="Is War?"/></label>
         <span class="property-value" aria-labelledby="location-label"><g:fieldValue bean="${remoteAppInstance}"
-                                                                                    field="isWarMode"/></span>
+                                                                                    field="isWar"/></span>
     </div>
-</g:if>
+
 
 <g:if test="${remoteAppInstance?.framework}">
     <div class="control-group col-xs-12">

@@ -17,9 +17,9 @@ class ReflectionService {
         def data = [:]
 
         data.name = grailsApplication.metadata."app.name"
-        data.location = grailsLinkGenerator.serverBaseURL
-        data.isWarMode = grailsApplication.warDeployed
-        data.version = grailsApplication.metadata."app.version"
+        data.location = grailsLinkGenerator.serverBaseURL + "\${data.name}"
+        data.isWar = grailsApplication.warDeployed
+        data.verNum = grailsApplication.metadata."app.version"
         data.framework = "Grails "+grailsApplication.metadata."app.grails.version"
 
         data.metadata = [:]
