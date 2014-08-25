@@ -1,0 +1,597 @@
+2014-08-25 23:20:07,777 [localhost-startStop-1] ERROR StackTrace  - Full Stack Trace:
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'transactionManagerPostProcessor': Initialization of bean failed; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'transactionManager': Cannot resolve reference to bean 'sessionFactory' while setting bean property 'sessionFactory'; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'sessionFactory': Invocation of init method failed; nested exception is org.hibernate.HibernateException: could not instantiate RegionFactory [org.hibernate.cache.ehcache.EhCacheRegionFactory]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:547)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:475)
+	at org.springframework.beans.factory.support.AbstractBeanFactory$1.getObject(AbstractBeanFactory.java:304)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:228)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:300)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:200)
+	at org.springframework.context.support.PostProcessorRegistrationDelegate.registerBeanPostProcessors(PostProcessorRegistrationDelegate.java:199)
+	at org.springframework.context.support.AbstractApplicationContext.registerBeanPostProcessors(AbstractApplicationContext.java:618)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:467)
+	at org.codehaus.groovy.grails.commons.spring.DefaultRuntimeSpringConfiguration.getApplicationContext(DefaultRuntimeSpringConfiguration.java:156)
+	at org.codehaus.groovy.grails.commons.spring.GrailsRuntimeConfigurator.initializeContext(GrailsRuntimeConfigurator.java:188)
+	at org.codehaus.groovy.grails.commons.spring.GrailsRuntimeConfigurator.configure(GrailsRuntimeConfigurator.java:168)
+	at org.codehaus.groovy.grails.commons.spring.GrailsRuntimeConfigurator.configure(GrailsRuntimeConfigurator.java:127)
+	at org.codehaus.groovy.grails.web.context.GrailsConfigUtils.configureWebApplicationContext(GrailsConfigUtils.java:126)
+	at org.codehaus.groovy.grails.web.context.GrailsContextLoaderListener.initWebApplicationContext(GrailsContextLoaderListener.java:109)
+	at org.springframework.web.context.ContextLoaderListener.contextInitialized(ContextLoaderListener.java:106)
+	at org.apache.catalina.core.StandardContext.listenerStart(StandardContext.java:4973)
+	at org.apache.catalina.core.StandardContext.startInternal(StandardContext.java:5467)
+	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:150)
+	at org.apache.catalina.core.ContainerBase$StartChild.call(ContainerBase.java:1559)
+	at org.apache.catalina.core.ContainerBase$StartChild.call(ContainerBase.java:1549)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:262)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1145)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:615)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'transactionManager': Cannot resolve reference to bean 'sessionFactory' while setting bean property 'sessionFactory'; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'sessionFactory': Invocation of init method failed; nested exception is org.hibernate.HibernateException: could not instantiate RegionFactory [org.hibernate.cache.ehcache.EhCacheRegionFactory]
+	at org.springframework.beans.factory.support.BeanDefinitionValueResolver.resolveReference(BeanDefinitionValueResolver.java:336)
+	at org.springframework.beans.factory.support.BeanDefinitionValueResolver.resolveValueIfNecessary(BeanDefinitionValueResolver.java:108)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.applyPropertyValues(AbstractAutowireCapableBeanFactory.java:1456)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1197)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:537)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:475)
+	at org.springframework.beans.factory.support.AbstractBeanFactory$1.getObject(AbstractBeanFactory.java:304)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:228)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:300)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:200)
+	at org.codehaus.groovy.grails.orm.support.TransactionManagerPostProcessor.initialize(TransactionManagerPostProcessor.java:74)
+	at org.codehaus.groovy.grails.orm.support.TransactionManagerPostProcessor.setBeanFactory(TransactionManagerPostProcessor.java:52)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeAwareMethods(AbstractAutowireCapableBeanFactory.java:1572)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1540)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:539)
+	... 24 more
+Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'sessionFactory': Invocation of init method failed; nested exception is org.hibernate.HibernateException: could not instantiate RegionFactory [org.hibernate.cache.ehcache.EhCacheRegionFactory]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1553)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:539)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:475)
+	at org.springframework.beans.factory.support.AbstractBeanFactory$1.getObject(AbstractBeanFactory.java:304)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:228)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:300)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:195)
+	at org.springframework.beans.factory.support.BeanDefinitionValueResolver.resolveReference(BeanDefinitionValueResolver.java:328)
+	... 38 more
+Caused by: org.hibernate.HibernateException: could not instantiate RegionFactory [org.hibernate.cache.ehcache.EhCacheRegionFactory]
+	at org.hibernate.cfg.SettingsFactory.createRegionFactory(SettingsFactory.java:423)
+	at org.hibernate.cfg.SettingsFactory.buildSettings(SettingsFactory.java:280)
+	at org.hibernate.cfg.Configuration.buildSettingsInternal(Configuration.java:2863)
+	at org.hibernate.cfg.Configuration.buildSettings(Configuration.java:2859)
+	at org.hibernate.cfg.Configuration.buildSessionFactory(Configuration.java:1870)
+	at org.codehaus.groovy.grails.orm.hibernate.cfg.GrailsAnnotationConfiguration.buildSessionFactory(GrailsAnnotationConfiguration.java:135)
+	at org.springframework.orm.hibernate3.LocalSessionFactoryBean.newSessionFactory(LocalSessionFactoryBean.java:793)
+	at org.codehaus.groovy.grails.orm.hibernate.ConfigurableLocalSessionFactoryBean.newSessionFactory(ConfigurableLocalSessionFactoryBean.java:245)
+	at org.springframework.orm.hibernate3.LocalSessionFactoryBean.buildSessionFactory(LocalSessionFactoryBean.java:715)
+	at org.codehaus.groovy.grails.orm.hibernate.ConfigurableLocalSessionFactoryBean.buildSessionFactory(ConfigurableLocalSessionFactoryBean.java:191)
+	at org.springframework.orm.hibernate3.AbstractSessionFactoryBean.afterPropertiesSet(AbstractSessionFactoryBean.java:189)
+	at org.codehaus.groovy.grails.orm.hibernate.ConfigurableLocalSessionFactoryBean.afterPropertiesSet(ConfigurableLocalSessionFactoryBean.java:235)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1612)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1549)
+	... 45 more
+Caused by: java.lang.ClassNotFoundException: org.hibernate.cache.ehcache.EhCacheRegionFactory
+	at java.net.URLClassLoader$1.run(URLClassLoader.java:366)
+	at java.net.URLClassLoader$1.run(URLClassLoader.java:355)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at java.net.URLClassLoader.findClass(URLClassLoader.java:354)
+	at java.lang.ClassLoader.loadClass(ClassLoader.java:425)
+	at groovy.lang.GroovyClassLoader.loadClass(GroovyClassLoader.java:655)
+	at groovy.lang.GroovyClassLoader.loadClass(GroovyClassLoader.java:765)
+	at groovy.lang.GroovyClassLoader.loadClass(GroovyClassLoader.java:753)
+	at java.lang.Class.forName0(Native Method)
+	at java.lang.Class.forName(Class.java:190)
+	at org.hibernate.util.ReflectHelper.classForName(ReflectHelper.java:192)
+	at org.hibernate.cfg.SettingsFactory.createRegionFactory(SettingsFactory.java:409)
+	... 58 more
+2014-08-25 23:20:07,782 [localhost-startStop-1] ERROR StackTrace  - Full Stack Trace:
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'transactionManager': Cannot resolve reference to bean 'sessionFactory' while setting bean property 'sessionFactory'; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'sessionFactory': Invocation of init method failed; nested exception is org.hibernate.HibernateException: could not instantiate RegionFactory [org.hibernate.cache.ehcache.EhCacheRegionFactory]
+	at org.springframework.beans.factory.support.BeanDefinitionValueResolver.resolveReference(BeanDefinitionValueResolver.java:336)
+	at org.springframework.beans.factory.support.BeanDefinitionValueResolver.resolveValueIfNecessary(BeanDefinitionValueResolver.java:108)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.applyPropertyValues(AbstractAutowireCapableBeanFactory.java:1456)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1197)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:537)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:475)
+	at org.springframework.beans.factory.support.AbstractBeanFactory$1.getObject(AbstractBeanFactory.java:304)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:228)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:300)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:200)
+	at org.codehaus.groovy.grails.orm.support.TransactionManagerPostProcessor.initialize(TransactionManagerPostProcessor.java:74)
+	at org.codehaus.groovy.grails.orm.support.TransactionManagerPostProcessor.setBeanFactory(TransactionManagerPostProcessor.java:52)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeAwareMethods(AbstractAutowireCapableBeanFactory.java:1572)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1540)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:539)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:475)
+	at org.springframework.beans.factory.support.AbstractBeanFactory$1.getObject(AbstractBeanFactory.java:304)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:228)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:300)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:200)
+	at org.springframework.context.support.PostProcessorRegistrationDelegate.registerBeanPostProcessors(PostProcessorRegistrationDelegate.java:199)
+	at org.springframework.context.support.AbstractApplicationContext.registerBeanPostProcessors(AbstractApplicationContext.java:618)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:467)
+	at org.codehaus.groovy.grails.commons.spring.DefaultRuntimeSpringConfiguration.getApplicationContext(DefaultRuntimeSpringConfiguration.java:156)
+	at org.codehaus.groovy.grails.commons.spring.GrailsRuntimeConfigurator.initializeContext(GrailsRuntimeConfigurator.java:188)
+	at org.codehaus.groovy.grails.commons.spring.GrailsRuntimeConfigurator.configure(GrailsRuntimeConfigurator.java:168)
+	at org.codehaus.groovy.grails.commons.spring.GrailsRuntimeConfigurator.configure(GrailsRuntimeConfigurator.java:127)
+	at org.codehaus.groovy.grails.web.context.GrailsConfigUtils.configureWebApplicationContext(GrailsConfigUtils.java:126)
+	at org.codehaus.groovy.grails.web.context.GrailsContextLoaderListener.initWebApplicationContext(GrailsContextLoaderListener.java:109)
+	at org.springframework.web.context.ContextLoaderListener.contextInitialized(ContextLoaderListener.java:106)
+	at org.apache.catalina.core.StandardContext.listenerStart(StandardContext.java:4973)
+	at org.apache.catalina.core.StandardContext.startInternal(StandardContext.java:5467)
+	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:150)
+	at org.apache.catalina.core.ContainerBase$StartChild.call(ContainerBase.java:1559)
+	at org.apache.catalina.core.ContainerBase$StartChild.call(ContainerBase.java:1549)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:262)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1145)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:615)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'sessionFactory': Invocation of init method failed; nested exception is org.hibernate.HibernateException: could not instantiate RegionFactory [org.hibernate.cache.ehcache.EhCacheRegionFactory]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1553)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:539)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:475)
+	at org.springframework.beans.factory.support.AbstractBeanFactory$1.getObject(AbstractBeanFactory.java:304)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:228)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:300)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:195)
+	at org.springframework.beans.factory.support.BeanDefinitionValueResolver.resolveReference(BeanDefinitionValueResolver.java:328)
+	... 38 more
+Caused by: org.hibernate.HibernateException: could not instantiate RegionFactory [org.hibernate.cache.ehcache.EhCacheRegionFactory]
+	at org.hibernate.cfg.SettingsFactory.createRegionFactory(SettingsFactory.java:423)
+	at org.hibernate.cfg.SettingsFactory.buildSettings(SettingsFactory.java:280)
+	at org.hibernate.cfg.Configuration.buildSettingsInternal(Configuration.java:2863)
+	at org.hibernate.cfg.Configuration.buildSettings(Configuration.java:2859)
+	at org.hibernate.cfg.Configuration.buildSessionFactory(Configuration.java:1870)
+	at org.codehaus.groovy.grails.orm.hibernate.cfg.GrailsAnnotationConfiguration.buildSessionFactory(GrailsAnnotationConfiguration.java:135)
+	at org.springframework.orm.hibernate3.LocalSessionFactoryBean.newSessionFactory(LocalSessionFactoryBean.java:793)
+	at org.codehaus.groovy.grails.orm.hibernate.ConfigurableLocalSessionFactoryBean.newSessionFactory(ConfigurableLocalSessionFactoryBean.java:245)
+	at org.springframework.orm.hibernate3.LocalSessionFactoryBean.buildSessionFactory(LocalSessionFactoryBean.java:715)
+	at org.codehaus.groovy.grails.orm.hibernate.ConfigurableLocalSessionFactoryBean.buildSessionFactory(ConfigurableLocalSessionFactoryBean.java:191)
+	at org.springframework.orm.hibernate3.AbstractSessionFactoryBean.afterPropertiesSet(AbstractSessionFactoryBean.java:189)
+	at org.codehaus.groovy.grails.orm.hibernate.ConfigurableLocalSessionFactoryBean.afterPropertiesSet(ConfigurableLocalSessionFactoryBean.java:235)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1612)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1549)
+	... 45 more
+Caused by: java.lang.ClassNotFoundException: org.hibernate.cache.ehcache.EhCacheRegionFactory
+	at java.net.URLClassLoader$1.run(URLClassLoader.java:366)
+	at java.net.URLClassLoader$1.run(URLClassLoader.java:355)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at java.net.URLClassLoader.findClass(URLClassLoader.java:354)
+	at java.lang.ClassLoader.loadClass(ClassLoader.java:425)
+	at groovy.lang.GroovyClassLoader.loadClass(GroovyClassLoader.java:655)
+	at groovy.lang.GroovyClassLoader.loadClass(GroovyClassLoader.java:765)
+	at groovy.lang.GroovyClassLoader.loadClass(GroovyClassLoader.java:753)
+	at java.lang.Class.forName0(Native Method)
+	at java.lang.Class.forName(Class.java:190)
+	at org.hibernate.util.ReflectHelper.classForName(ReflectHelper.java:192)
+	at org.hibernate.cfg.SettingsFactory.createRegionFactory(SettingsFactory.java:409)
+	... 58 more
+2014-08-25 23:20:07,783 [localhost-startStop-1] ERROR StackTrace  - Full Stack Trace:
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'sessionFactory': Invocation of init method failed; nested exception is org.hibernate.HibernateException: could not instantiate RegionFactory [org.hibernate.cache.ehcache.EhCacheRegionFactory]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1553)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:539)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:475)
+	at org.springframework.beans.factory.support.AbstractBeanFactory$1.getObject(AbstractBeanFactory.java:304)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:228)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:300)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:195)
+	at org.springframework.beans.factory.support.BeanDefinitionValueResolver.resolveReference(BeanDefinitionValueResolver.java:328)
+	at org.springframework.beans.factory.support.BeanDefinitionValueResolver.resolveValueIfNecessary(BeanDefinitionValueResolver.java:108)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.applyPropertyValues(AbstractAutowireCapableBeanFactory.java:1456)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1197)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:537)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:475)
+	at org.springframework.beans.factory.support.AbstractBeanFactory$1.getObject(AbstractBeanFactory.java:304)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:228)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:300)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:200)
+	at org.codehaus.groovy.grails.orm.support.TransactionManagerPostProcessor.initialize(TransactionManagerPostProcessor.java:74)
+	at org.codehaus.groovy.grails.orm.support.TransactionManagerPostProcessor.setBeanFactory(TransactionManagerPostProcessor.java:52)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeAwareMethods(AbstractAutowireCapableBeanFactory.java:1572)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1540)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:539)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:475)
+	at org.springframework.beans.factory.support.AbstractBeanFactory$1.getObject(AbstractBeanFactory.java:304)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:228)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:300)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:200)
+	at org.springframework.context.support.PostProcessorRegistrationDelegate.registerBeanPostProcessors(PostProcessorRegistrationDelegate.java:199)
+	at org.springframework.context.support.AbstractApplicationContext.registerBeanPostProcessors(AbstractApplicationContext.java:618)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:467)
+	at org.codehaus.groovy.grails.commons.spring.DefaultRuntimeSpringConfiguration.getApplicationContext(DefaultRuntimeSpringConfiguration.java:156)
+	at org.codehaus.groovy.grails.commons.spring.GrailsRuntimeConfigurator.initializeContext(GrailsRuntimeConfigurator.java:188)
+	at org.codehaus.groovy.grails.commons.spring.GrailsRuntimeConfigurator.configure(GrailsRuntimeConfigurator.java:168)
+	at org.codehaus.groovy.grails.commons.spring.GrailsRuntimeConfigurator.configure(GrailsRuntimeConfigurator.java:127)
+	at org.codehaus.groovy.grails.web.context.GrailsConfigUtils.configureWebApplicationContext(GrailsConfigUtils.java:126)
+	at org.codehaus.groovy.grails.web.context.GrailsContextLoaderListener.initWebApplicationContext(GrailsContextLoaderListener.java:109)
+	at org.springframework.web.context.ContextLoaderListener.contextInitialized(ContextLoaderListener.java:106)
+	at org.apache.catalina.core.StandardContext.listenerStart(StandardContext.java:4973)
+	at org.apache.catalina.core.StandardContext.startInternal(StandardContext.java:5467)
+	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:150)
+	at org.apache.catalina.core.ContainerBase$StartChild.call(ContainerBase.java:1559)
+	at org.apache.catalina.core.ContainerBase$StartChild.call(ContainerBase.java:1549)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:262)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1145)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:615)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: org.hibernate.HibernateException: could not instantiate RegionFactory [org.hibernate.cache.ehcache.EhCacheRegionFactory]
+	at org.hibernate.cfg.SettingsFactory.createRegionFactory(SettingsFactory.java:423)
+	at org.hibernate.cfg.SettingsFactory.buildSettings(SettingsFactory.java:280)
+	at org.hibernate.cfg.Configuration.buildSettingsInternal(Configuration.java:2863)
+	at org.hibernate.cfg.Configuration.buildSettings(Configuration.java:2859)
+	at org.hibernate.cfg.Configuration.buildSessionFactory(Configuration.java:1870)
+	at org.codehaus.groovy.grails.orm.hibernate.cfg.GrailsAnnotationConfiguration.buildSessionFactory(GrailsAnnotationConfiguration.java:135)
+	at org.springframework.orm.hibernate3.LocalSessionFactoryBean.newSessionFactory(LocalSessionFactoryBean.java:793)
+	at org.codehaus.groovy.grails.orm.hibernate.ConfigurableLocalSessionFactoryBean.newSessionFactory(ConfigurableLocalSessionFactoryBean.java:245)
+	at org.springframework.orm.hibernate3.LocalSessionFactoryBean.buildSessionFactory(LocalSessionFactoryBean.java:715)
+	at org.codehaus.groovy.grails.orm.hibernate.ConfigurableLocalSessionFactoryBean.buildSessionFactory(ConfigurableLocalSessionFactoryBean.java:191)
+	at org.springframework.orm.hibernate3.AbstractSessionFactoryBean.afterPropertiesSet(AbstractSessionFactoryBean.java:189)
+	at org.codehaus.groovy.grails.orm.hibernate.ConfigurableLocalSessionFactoryBean.afterPropertiesSet(ConfigurableLocalSessionFactoryBean.java:235)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1612)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1549)
+	... 45 more
+Caused by: java.lang.ClassNotFoundException: org.hibernate.cache.ehcache.EhCacheRegionFactory
+	at java.net.URLClassLoader$1.run(URLClassLoader.java:366)
+	at java.net.URLClassLoader$1.run(URLClassLoader.java:355)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at java.net.URLClassLoader.findClass(URLClassLoader.java:354)
+	at java.lang.ClassLoader.loadClass(ClassLoader.java:425)
+	at groovy.lang.GroovyClassLoader.loadClass(GroovyClassLoader.java:655)
+	at groovy.lang.GroovyClassLoader.loadClass(GroovyClassLoader.java:765)
+	at groovy.lang.GroovyClassLoader.loadClass(GroovyClassLoader.java:753)
+	at java.lang.Class.forName0(Native Method)
+	at java.lang.Class.forName(Class.java:190)
+	at org.hibernate.util.ReflectHelper.classForName(ReflectHelper.java:192)
+	at org.hibernate.cfg.SettingsFactory.createRegionFactory(SettingsFactory.java:409)
+	... 58 more
+2014-08-25 23:20:07,784 [localhost-startStop-1] ERROR StackTrace  - Full Stack Trace:
+org.hibernate.HibernateException: could not instantiate RegionFactory [org.hibernate.cache.ehcache.EhCacheRegionFactory]
+	at org.hibernate.cfg.SettingsFactory.createRegionFactory(SettingsFactory.java:423)
+	at org.hibernate.cfg.SettingsFactory.buildSettings(SettingsFactory.java:280)
+	at org.hibernate.cfg.Configuration.buildSettingsInternal(Configuration.java:2863)
+	at org.hibernate.cfg.Configuration.buildSettings(Configuration.java:2859)
+	at org.hibernate.cfg.Configuration.buildSessionFactory(Configuration.java:1870)
+	at org.codehaus.groovy.grails.orm.hibernate.cfg.GrailsAnnotationConfiguration.buildSessionFactory(GrailsAnnotationConfiguration.java:135)
+	at org.springframework.orm.hibernate3.LocalSessionFactoryBean.newSessionFactory(LocalSessionFactoryBean.java:793)
+	at org.codehaus.groovy.grails.orm.hibernate.ConfigurableLocalSessionFactoryBean.newSessionFactory(ConfigurableLocalSessionFactoryBean.java:245)
+	at org.springframework.orm.hibernate3.LocalSessionFactoryBean.buildSessionFactory(LocalSessionFactoryBean.java:715)
+	at org.codehaus.groovy.grails.orm.hibernate.ConfigurableLocalSessionFactoryBean.buildSessionFactory(ConfigurableLocalSessionFactoryBean.java:191)
+	at org.springframework.orm.hibernate3.AbstractSessionFactoryBean.afterPropertiesSet(AbstractSessionFactoryBean.java:189)
+	at org.codehaus.groovy.grails.orm.hibernate.ConfigurableLocalSessionFactoryBean.afterPropertiesSet(ConfigurableLocalSessionFactoryBean.java:235)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1612)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1549)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:539)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:475)
+	at org.springframework.beans.factory.support.AbstractBeanFactory$1.getObject(AbstractBeanFactory.java:304)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:228)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:300)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:195)
+	at org.springframework.beans.factory.support.BeanDefinitionValueResolver.resolveReference(BeanDefinitionValueResolver.java:328)
+	at org.springframework.beans.factory.support.BeanDefinitionValueResolver.resolveValueIfNecessary(BeanDefinitionValueResolver.java:108)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.applyPropertyValues(AbstractAutowireCapableBeanFactory.java:1456)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1197)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:537)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:475)
+	at org.springframework.beans.factory.support.AbstractBeanFactory$1.getObject(AbstractBeanFactory.java:304)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:228)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:300)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:200)
+	at org.codehaus.groovy.grails.orm.support.TransactionManagerPostProcessor.initialize(TransactionManagerPostProcessor.java:74)
+	at org.codehaus.groovy.grails.orm.support.TransactionManagerPostProcessor.setBeanFactory(TransactionManagerPostProcessor.java:52)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeAwareMethods(AbstractAutowireCapableBeanFactory.java:1572)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1540)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:539)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:475)
+	at org.springframework.beans.factory.support.AbstractBeanFactory$1.getObject(AbstractBeanFactory.java:304)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:228)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:300)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:200)
+	at org.springframework.context.support.PostProcessorRegistrationDelegate.registerBeanPostProcessors(PostProcessorRegistrationDelegate.java:199)
+	at org.springframework.context.support.AbstractApplicationContext.registerBeanPostProcessors(AbstractApplicationContext.java:618)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:467)
+	at org.codehaus.groovy.grails.commons.spring.DefaultRuntimeSpringConfiguration.getApplicationContext(DefaultRuntimeSpringConfiguration.java:156)
+	at org.codehaus.groovy.grails.commons.spring.GrailsRuntimeConfigurator.initializeContext(GrailsRuntimeConfigurator.java:188)
+	at org.codehaus.groovy.grails.commons.spring.GrailsRuntimeConfigurator.configure(GrailsRuntimeConfigurator.java:168)
+	at org.codehaus.groovy.grails.commons.spring.GrailsRuntimeConfigurator.configure(GrailsRuntimeConfigurator.java:127)
+	at org.codehaus.groovy.grails.web.context.GrailsConfigUtils.configureWebApplicationContext(GrailsConfigUtils.java:126)
+	at org.codehaus.groovy.grails.web.context.GrailsContextLoaderListener.initWebApplicationContext(GrailsContextLoaderListener.java:109)
+	at org.springframework.web.context.ContextLoaderListener.contextInitialized(ContextLoaderListener.java:106)
+	at org.apache.catalina.core.StandardContext.listenerStart(StandardContext.java:4973)
+	at org.apache.catalina.core.StandardContext.startInternal(StandardContext.java:5467)
+	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:150)
+	at org.apache.catalina.core.ContainerBase$StartChild.call(ContainerBase.java:1559)
+	at org.apache.catalina.core.ContainerBase$StartChild.call(ContainerBase.java:1549)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:262)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1145)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:615)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: java.lang.ClassNotFoundException: org.hibernate.cache.ehcache.EhCacheRegionFactory
+	at java.net.URLClassLoader$1.run(URLClassLoader.java:366)
+	at java.net.URLClassLoader$1.run(URLClassLoader.java:355)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at java.net.URLClassLoader.findClass(URLClassLoader.java:354)
+	at java.lang.ClassLoader.loadClass(ClassLoader.java:425)
+	at groovy.lang.GroovyClassLoader.loadClass(GroovyClassLoader.java:655)
+	at groovy.lang.GroovyClassLoader.loadClass(GroovyClassLoader.java:765)
+	at groovy.lang.GroovyClassLoader.loadClass(GroovyClassLoader.java:753)
+	at java.lang.Class.forName0(Native Method)
+	at java.lang.Class.forName(Class.java:190)
+	at org.hibernate.util.ReflectHelper.classForName(ReflectHelper.java:192)
+	at org.hibernate.cfg.SettingsFactory.createRegionFactory(SettingsFactory.java:409)
+	... 58 more
+2014-08-25 23:20:07,785 [localhost-startStop-1] ERROR StackTrace  - Full Stack Trace:
+java.lang.ClassNotFoundException: org.hibernate.cache.ehcache.EhCacheRegionFactory
+	at java.net.URLClassLoader$1.run(URLClassLoader.java:366)
+	at java.net.URLClassLoader$1.run(URLClassLoader.java:355)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at java.net.URLClassLoader.findClass(URLClassLoader.java:354)
+	at java.lang.ClassLoader.loadClass(ClassLoader.java:425)
+	at groovy.lang.GroovyClassLoader.loadClass(GroovyClassLoader.java:655)
+	at groovy.lang.GroovyClassLoader.loadClass(GroovyClassLoader.java:765)
+	at groovy.lang.GroovyClassLoader.loadClass(GroovyClassLoader.java:753)
+	at java.lang.Class.forName0(Native Method)
+	at java.lang.Class.forName(Class.java:190)
+	at org.hibernate.util.ReflectHelper.classForName(ReflectHelper.java:192)
+	at org.hibernate.cfg.SettingsFactory.createRegionFactory(SettingsFactory.java:409)
+	at org.hibernate.cfg.SettingsFactory.buildSettings(SettingsFactory.java:280)
+	at org.hibernate.cfg.Configuration.buildSettingsInternal(Configuration.java:2863)
+	at org.hibernate.cfg.Configuration.buildSettings(Configuration.java:2859)
+	at org.hibernate.cfg.Configuration.buildSessionFactory(Configuration.java:1870)
+	at org.codehaus.groovy.grails.orm.hibernate.cfg.GrailsAnnotationConfiguration.buildSessionFactory(GrailsAnnotationConfiguration.java:135)
+	at org.springframework.orm.hibernate3.LocalSessionFactoryBean.newSessionFactory(LocalSessionFactoryBean.java:793)
+	at org.codehaus.groovy.grails.orm.hibernate.ConfigurableLocalSessionFactoryBean.newSessionFactory(ConfigurableLocalSessionFactoryBean.java:245)
+	at org.springframework.orm.hibernate3.LocalSessionFactoryBean.buildSessionFactory(LocalSessionFactoryBean.java:715)
+	at org.codehaus.groovy.grails.orm.hibernate.ConfigurableLocalSessionFactoryBean.buildSessionFactory(ConfigurableLocalSessionFactoryBean.java:191)
+	at org.springframework.orm.hibernate3.AbstractSessionFactoryBean.afterPropertiesSet(AbstractSessionFactoryBean.java:189)
+	at org.codehaus.groovy.grails.orm.hibernate.ConfigurableLocalSessionFactoryBean.afterPropertiesSet(ConfigurableLocalSessionFactoryBean.java:235)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1612)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1549)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:539)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:475)
+	at org.springframework.beans.factory.support.AbstractBeanFactory$1.getObject(AbstractBeanFactory.java:304)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:228)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:300)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:195)
+	at org.springframework.beans.factory.support.BeanDefinitionValueResolver.resolveReference(BeanDefinitionValueResolver.java:328)
+	at org.springframework.beans.factory.support.BeanDefinitionValueResolver.resolveValueIfNecessary(BeanDefinitionValueResolver.java:108)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.applyPropertyValues(AbstractAutowireCapableBeanFactory.java:1456)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1197)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:537)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:475)
+	at org.springframework.beans.factory.support.AbstractBeanFactory$1.getObject(AbstractBeanFactory.java:304)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:228)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:300)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:200)
+	at org.codehaus.groovy.grails.orm.support.TransactionManagerPostProcessor.initialize(TransactionManagerPostProcessor.java:74)
+	at org.codehaus.groovy.grails.orm.support.TransactionManagerPostProcessor.setBeanFactory(TransactionManagerPostProcessor.java:52)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeAwareMethods(AbstractAutowireCapableBeanFactory.java:1572)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1540)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:539)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:475)
+	at org.springframework.beans.factory.support.AbstractBeanFactory$1.getObject(AbstractBeanFactory.java:304)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:228)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:300)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:200)
+	at org.springframework.context.support.PostProcessorRegistrationDelegate.registerBeanPostProcessors(PostProcessorRegistrationDelegate.java:199)
+	at org.springframework.context.support.AbstractApplicationContext.registerBeanPostProcessors(AbstractApplicationContext.java:618)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:467)
+	at org.codehaus.groovy.grails.commons.spring.DefaultRuntimeSpringConfiguration.getApplicationContext(DefaultRuntimeSpringConfiguration.java:156)
+	at org.codehaus.groovy.grails.commons.spring.GrailsRuntimeConfigurator.initializeContext(GrailsRuntimeConfigurator.java:188)
+	at org.codehaus.groovy.grails.commons.spring.GrailsRuntimeConfigurator.configure(GrailsRuntimeConfigurator.java:168)
+	at org.codehaus.groovy.grails.commons.spring.GrailsRuntimeConfigurator.configure(GrailsRuntimeConfigurator.java:127)
+	at org.codehaus.groovy.grails.web.context.GrailsConfigUtils.configureWebApplicationContext(GrailsConfigUtils.java:126)
+	at org.codehaus.groovy.grails.web.context.GrailsContextLoaderListener.initWebApplicationContext(GrailsContextLoaderListener.java:109)
+	at org.springframework.web.context.ContextLoaderListener.contextInitialized(ContextLoaderListener.java:106)
+	at org.apache.catalina.core.StandardContext.listenerStart(StandardContext.java:4973)
+	at org.apache.catalina.core.StandardContext.startInternal(StandardContext.java:5467)
+	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:150)
+	at org.apache.catalina.core.ContainerBase$StartChild.call(ContainerBase.java:1559)
+	at org.apache.catalina.core.ContainerBase$StartChild.call(ContainerBase.java:1549)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:262)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1145)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:615)
+	at java.lang.Thread.run(Thread.java:745)
+2014-08-25 23:20:07,786 [localhost-startStop-1] ERROR StackTrace  - Full Stack Trace:
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'transactionManagerPostProcessor': Initialization of bean failed; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'transactionManager': Cannot resolve reference to bean 'sessionFactory' while setting bean property 'sessionFactory'; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'sessionFactory': Invocation of init method failed; nested exception is org.hibernate.HibernateException: could not instantiate RegionFactory [org.hibernate.cache.ehcache.EhCacheRegionFactory]
+	at java.util.concurrent.FutureTask.run(FutureTask.java:262)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1145)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:615)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'transactionManager': Cannot resolve reference to bean 'sessionFactory' while setting bean property 'sessionFactory'; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'sessionFactory': Invocation of init method failed; nested exception is org.hibernate.HibernateException: could not instantiate RegionFactory [org.hibernate.cache.ehcache.EhCacheRegionFactory]
+	... 4 more
+Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'sessionFactory': Invocation of init method failed; nested exception is org.hibernate.HibernateException: could not instantiate RegionFactory [org.hibernate.cache.ehcache.EhCacheRegionFactory]
+	... 4 more
+Caused by: org.hibernate.HibernateException: could not instantiate RegionFactory [org.hibernate.cache.ehcache.EhCacheRegionFactory]
+	... 4 more
+Caused by: java.lang.ClassNotFoundException: org.hibernate.cache.ehcache.EhCacheRegionFactory
+	at java.net.URLClassLoader$1.run(URLClassLoader.java:366)
+	at java.net.URLClassLoader$1.run(URLClassLoader.java:355)
+	at java.net.URLClassLoader.findClass(URLClassLoader.java:354)
+	at java.lang.ClassLoader.loadClass(ClassLoader.java:425)
+	at java.lang.Class.forName(Class.java:190)
+	... 4 more
+2014-08-25 23:20:07,786 [localhost-startStop-1] ERROR StackTrace  - Full Stack Trace:
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'transactionManagerPostProcessor': Initialization of bean failed; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'transactionManager': Cannot resolve reference to bean 'sessionFactory' while setting bean property 'sessionFactory'; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'sessionFactory': Invocation of init method failed; nested exception is org.hibernate.HibernateException: could not instantiate RegionFactory [org.hibernate.cache.ehcache.EhCacheRegionFactory]
+	at java.util.concurrent.FutureTask.run(FutureTask.java:262)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1145)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:615)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'transactionManager': Cannot resolve reference to bean 'sessionFactory' while setting bean property 'sessionFactory'; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'sessionFactory': Invocation of init method failed; nested exception is org.hibernate.HibernateException: could not instantiate RegionFactory [org.hibernate.cache.ehcache.EhCacheRegionFactory]
+	... 4 more
+Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'sessionFactory': Invocation of init method failed; nested exception is org.hibernate.HibernateException: could not instantiate RegionFactory [org.hibernate.cache.ehcache.EhCacheRegionFactory]
+	... 4 more
+Caused by: org.hibernate.HibernateException: could not instantiate RegionFactory [org.hibernate.cache.ehcache.EhCacheRegionFactory]
+	... 4 more
+Caused by: java.lang.ClassNotFoundException: org.hibernate.cache.ehcache.EhCacheRegionFactory
+	at java.net.URLClassLoader$1.run(URLClassLoader.java:366)
+	at java.net.URLClassLoader$1.run(URLClassLoader.java:355)
+	at java.net.URLClassLoader.findClass(URLClassLoader.java:354)
+	at java.lang.ClassLoader.loadClass(ClassLoader.java:425)
+	at java.lang.Class.forName(Class.java:190)
+	... 4 more
+2014-08-25 23:20:07,786 [localhost-startStop-1] ERROR StackTrace  - Full Stack Trace:
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'transactionManager': Cannot resolve reference to bean 'sessionFactory' while setting bean property 'sessionFactory'; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'sessionFactory': Invocation of init method failed; nested exception is org.hibernate.HibernateException: could not instantiate RegionFactory [org.hibernate.cache.ehcache.EhCacheRegionFactory]
+	at java.util.concurrent.FutureTask.run(FutureTask.java:262)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1145)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:615)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'sessionFactory': Invocation of init method failed; nested exception is org.hibernate.HibernateException: could not instantiate RegionFactory [org.hibernate.cache.ehcache.EhCacheRegionFactory]
+	... 4 more
+Caused by: org.hibernate.HibernateException: could not instantiate RegionFactory [org.hibernate.cache.ehcache.EhCacheRegionFactory]
+	... 4 more
+Caused by: java.lang.ClassNotFoundException: org.hibernate.cache.ehcache.EhCacheRegionFactory
+	at java.net.URLClassLoader$1.run(URLClassLoader.java:366)
+	at java.net.URLClassLoader$1.run(URLClassLoader.java:355)
+	at java.net.URLClassLoader.findClass(URLClassLoader.java:354)
+	at java.lang.ClassLoader.loadClass(ClassLoader.java:425)
+	at java.lang.Class.forName(Class.java:190)
+	... 4 more
+2014-08-25 23:20:07,787 [localhost-startStop-1] ERROR StackTrace  - Full Stack Trace:
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'sessionFactory': Invocation of init method failed; nested exception is org.hibernate.HibernateException: could not instantiate RegionFactory [org.hibernate.cache.ehcache.EhCacheRegionFactory]
+	at java.util.concurrent.FutureTask.run(FutureTask.java:262)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1145)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:615)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: org.hibernate.HibernateException: could not instantiate RegionFactory [org.hibernate.cache.ehcache.EhCacheRegionFactory]
+	... 4 more
+Caused by: java.lang.ClassNotFoundException: org.hibernate.cache.ehcache.EhCacheRegionFactory
+	at java.net.URLClassLoader$1.run(URLClassLoader.java:366)
+	at java.net.URLClassLoader$1.run(URLClassLoader.java:355)
+	at java.net.URLClassLoader.findClass(URLClassLoader.java:354)
+	at java.lang.ClassLoader.loadClass(ClassLoader.java:425)
+	at java.lang.Class.forName(Class.java:190)
+	... 4 more
+2014-08-25 23:20:07,787 [localhost-startStop-1] ERROR StackTrace  - Full Stack Trace:
+org.hibernate.HibernateException: could not instantiate RegionFactory [org.hibernate.cache.ehcache.EhCacheRegionFactory]
+	at java.util.concurrent.FutureTask.run(FutureTask.java:262)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1145)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:615)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: java.lang.ClassNotFoundException: org.hibernate.cache.ehcache.EhCacheRegionFactory
+	at java.net.URLClassLoader$1.run(URLClassLoader.java:366)
+	at java.net.URLClassLoader$1.run(URLClassLoader.java:355)
+	at java.net.URLClassLoader.findClass(URLClassLoader.java:354)
+	at java.lang.ClassLoader.loadClass(ClassLoader.java:425)
+	at java.lang.Class.forName(Class.java:190)
+	... 4 more
+2014-08-25 23:20:07,787 [localhost-startStop-1] ERROR StackTrace  - Full Stack Trace:
+java.lang.ClassNotFoundException: org.hibernate.cache.ehcache.EhCacheRegionFactory
+	at java.net.URLClassLoader$1.run(URLClassLoader.java:366)
+	at java.net.URLClassLoader$1.run(URLClassLoader.java:355)
+	at java.net.URLClassLoader.findClass(URLClassLoader.java:354)
+	at java.lang.ClassLoader.loadClass(ClassLoader.java:425)
+	at java.lang.Class.forName(Class.java:190)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:262)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1145)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:615)
+	at java.lang.Thread.run(Thread.java:745)
+2014-08-25 23:20:07,787 [localhost-startStop-1] ERROR StackTrace  - Full Stack Trace:
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'transactionManagerPostProcessor': Initialization of bean failed; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'transactionManager': Cannot resolve reference to bean 'sessionFactory' while setting bean property 'sessionFactory'; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'sessionFactory': Invocation of init method failed; nested exception is org.hibernate.HibernateException: could not instantiate RegionFactory [org.hibernate.cache.ehcache.EhCacheRegionFactory]
+	at java.util.concurrent.FutureTask.run(FutureTask.java:262)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1145)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:615)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'transactionManager': Cannot resolve reference to bean 'sessionFactory' while setting bean property 'sessionFactory'; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'sessionFactory': Invocation of init method failed; nested exception is org.hibernate.HibernateException: could not instantiate RegionFactory [org.hibernate.cache.ehcache.EhCacheRegionFactory]
+	... 4 more
+Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'sessionFactory': Invocation of init method failed; nested exception is org.hibernate.HibernateException: could not instantiate RegionFactory [org.hibernate.cache.ehcache.EhCacheRegionFactory]
+	... 4 more
+Caused by: org.hibernate.HibernateException: could not instantiate RegionFactory [org.hibernate.cache.ehcache.EhCacheRegionFactory]
+	... 4 more
+Caused by: java.lang.ClassNotFoundException: org.hibernate.cache.ehcache.EhCacheRegionFactory
+	at java.net.URLClassLoader$1.run(URLClassLoader.java:366)
+	at java.net.URLClassLoader$1.run(URLClassLoader.java:355)
+	at java.net.URLClassLoader.findClass(URLClassLoader.java:354)
+	at java.lang.ClassLoader.loadClass(ClassLoader.java:425)
+	at java.lang.Class.forName(Class.java:190)
+	... 4 more
+2014-08-25 23:20:07,788 [localhost-startStop-1] ERROR StackTrace  - Full Stack Trace:
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'transactionManagerPostProcessor': Initialization of bean failed; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'transactionManager': Cannot resolve reference to bean 'sessionFactory' while setting bean property 'sessionFactory'; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'sessionFactory': Invocation of init method failed; nested exception is org.hibernate.HibernateException: could not instantiate RegionFactory [org.hibernate.cache.ehcache.EhCacheRegionFactory]
+	at java.util.concurrent.FutureTask.run(FutureTask.java:262)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1145)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:615)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'transactionManager': Cannot resolve reference to bean 'sessionFactory' while setting bean property 'sessionFactory'; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'sessionFactory': Invocation of init method failed; nested exception is org.hibernate.HibernateException: could not instantiate RegionFactory [org.hibernate.cache.ehcache.EhCacheRegionFactory]
+	... 4 more
+Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'sessionFactory': Invocation of init method failed; nested exception is org.hibernate.HibernateException: could not instantiate RegionFactory [org.hibernate.cache.ehcache.EhCacheRegionFactory]
+	... 4 more
+Caused by: org.hibernate.HibernateException: could not instantiate RegionFactory [org.hibernate.cache.ehcache.EhCacheRegionFactory]
+	... 4 more
+Caused by: java.lang.ClassNotFoundException: org.hibernate.cache.ehcache.EhCacheRegionFactory
+	at java.net.URLClassLoader$1.run(URLClassLoader.java:366)
+	at java.net.URLClassLoader$1.run(URLClassLoader.java:355)
+	at java.net.URLClassLoader.findClass(URLClassLoader.java:354)
+	at java.lang.ClassLoader.loadClass(ClassLoader.java:425)
+	at java.lang.Class.forName(Class.java:190)
+	... 4 more
+2014-08-25 23:20:07,788 [localhost-startStop-1] ERROR StackTrace  - Full Stack Trace:
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'transactionManager': Cannot resolve reference to bean 'sessionFactory' while setting bean property 'sessionFactory'; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'sessionFactory': Invocation of init method failed; nested exception is org.hibernate.HibernateException: could not instantiate RegionFactory [org.hibernate.cache.ehcache.EhCacheRegionFactory]
+	at java.util.concurrent.FutureTask.run(FutureTask.java:262)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1145)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:615)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'sessionFactory': Invocation of init method failed; nested exception is org.hibernate.HibernateException: could not instantiate RegionFactory [org.hibernate.cache.ehcache.EhCacheRegionFactory]
+	... 4 more
+Caused by: org.hibernate.HibernateException: could not instantiate RegionFactory [org.hibernate.cache.ehcache.EhCacheRegionFactory]
+	... 4 more
+Caused by: java.lang.ClassNotFoundException: org.hibernate.cache.ehcache.EhCacheRegionFactory
+	at java.net.URLClassLoader$1.run(URLClassLoader.java:366)
+	at java.net.URLClassLoader$1.run(URLClassLoader.java:355)
+	at java.net.URLClassLoader.findClass(URLClassLoader.java:354)
+	at java.lang.ClassLoader.loadClass(ClassLoader.java:425)
+	at java.lang.Class.forName(Class.java:190)
+	... 4 more
+2014-08-25 23:20:07,788 [localhost-startStop-1] ERROR StackTrace  - Full Stack Trace:
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'sessionFactory': Invocation of init method failed; nested exception is org.hibernate.HibernateException: could not instantiate RegionFactory [org.hibernate.cache.ehcache.EhCacheRegionFactory]
+	at java.util.concurrent.FutureTask.run(FutureTask.java:262)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1145)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:615)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: org.hibernate.HibernateException: could not instantiate RegionFactory [org.hibernate.cache.ehcache.EhCacheRegionFactory]
+	... 4 more
+Caused by: java.lang.ClassNotFoundException: org.hibernate.cache.ehcache.EhCacheRegionFactory
+	at java.net.URLClassLoader$1.run(URLClassLoader.java:366)
+	at java.net.URLClassLoader$1.run(URLClassLoader.java:355)
+	at java.net.URLClassLoader.findClass(URLClassLoader.java:354)
+	at java.lang.ClassLoader.loadClass(ClassLoader.java:425)
+	at java.lang.Class.forName(Class.java:190)
+	... 4 more
+2014-08-25 23:20:07,788 [localhost-startStop-1] ERROR StackTrace  - Full Stack Trace:
+org.hibernate.HibernateException: could not instantiate RegionFactory [org.hibernate.cache.ehcache.EhCacheRegionFactory]
+	at java.util.concurrent.FutureTask.run(FutureTask.java:262)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1145)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:615)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: java.lang.ClassNotFoundException: org.hibernate.cache.ehcache.EhCacheRegionFactory
+	at java.net.URLClassLoader$1.run(URLClassLoader.java:366)
+	at java.net.URLClassLoader$1.run(URLClassLoader.java:355)
+	at java.net.URLClassLoader.findClass(URLClassLoader.java:354)
+	at java.lang.ClassLoader.loadClass(ClassLoader.java:425)
+	at java.lang.Class.forName(Class.java:190)
+	... 4 more
+2014-08-25 23:20:07,789 [localhost-startStop-1] ERROR StackTrace  - Full Stack Trace:
+java.lang.ClassNotFoundException: org.hibernate.cache.ehcache.EhCacheRegionFactory
+	at java.net.URLClassLoader$1.run(URLClassLoader.java:366)
+	at java.net.URLClassLoader$1.run(URLClassLoader.java:355)
+	at java.net.URLClassLoader.findClass(URLClassLoader.java:354)
+	at java.lang.ClassLoader.loadClass(ClassLoader.java:425)
+	at java.lang.Class.forName(Class.java:190)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:262)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1145)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:615)
+	at java.lang.Thread.run(Thread.java:745)
+2014-08-25 23:20:07,789 [localhost-startStop-1] ERROR StackTrace  - Full Stack Trace:
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'transactionManagerPostProcessor': Initialization of bean failed; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'transactionManager': Cannot resolve reference to bean 'sessionFactory' while setting bean property 'sessionFactory'; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'sessionFactory': Invocation of init method failed; nested exception is org.hibernate.HibernateException: could not instantiate RegionFactory [org.hibernate.cache.ehcache.EhCacheRegionFactory]
+	at java.util.concurrent.FutureTask.run(FutureTask.java:262)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1145)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:615)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'transactionManager': Cannot resolve reference to bean 'sessionFactory' while setting bean property 'sessionFactory'; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'sessionFactory': Invocation of init method failed; nested exception is org.hibernate.HibernateException: could not instantiate RegionFactory [org.hibernate.cache.ehcache.EhCacheRegionFactory]
+	... 4 more
+Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'sessionFactory': Invocation of init method failed; nested exception is org.hibernate.HibernateException: could not instantiate RegionFactory [org.hibernate.cache.ehcache.EhCacheRegionFactory]
+	... 4 more
+Caused by: org.hibernate.HibernateException: could not instantiate RegionFactory [org.hibernate.cache.ehcache.EhCacheRegionFactory]
+	... 4 more
+Caused by: java.lang.ClassNotFoundException: org.hibernate.cache.ehcache.EhCacheRegionFactory
+	at java.net.URLClassLoader$1.run(URLClassLoader.java:366)
+	at java.net.URLClassLoader$1.run(URLClassLoader.java:355)
+	at java.net.URLClassLoader.findClass(URLClassLoader.java:354)
+	at java.lang.ClassLoader.loadClass(ClassLoader.java:425)
+	at java.lang.Class.forName(Class.java:190)
+	... 4 more
