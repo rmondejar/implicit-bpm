@@ -4,7 +4,11 @@ class Weaver {
 
     String line
     static hasOne = [act:Act]
-    static hasMany = [beviours:Behaviour]
+    static hasMany = [behaviours:Behaviour]
+
+    String toString() {
+        "$act, ${behaviours*.toString().join(" and ")};"
+    }
 
     static mapping = {
         table 'IBPM_WEAVER_ENTRY'
