@@ -39,7 +39,7 @@ class WeaverService {
         weaver.act = act
         //weaver.behaviours = bhs
         bhs.eachWithIndex { Behaviour bh, i ->
-            bh.order = i
+            bh.position = i
             weaver.addToBehaviours(bh)
         }
 

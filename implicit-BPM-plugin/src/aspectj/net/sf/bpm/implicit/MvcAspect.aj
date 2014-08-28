@@ -32,28 +32,36 @@ public aspect MvcAspect extends MvcXpi implements ImplicitBpm {
 //	    }
 	    
 	    Object around() : controllerAction() {
-	        trigger("BEFORE CONTROLLER ACTION", thisJoinPoint);
+	        intercept("BEFORE CONTROLLER ACTION", thisJoinPoint);
 	        Object res = proceed();
-	        trigger("AFTER CONTROLLER ACTION", thisJoinPoint);	
+            intercept("AFTER CONTROLLER ACTION", thisJoinPoint);
 	        return res;
 	    }
 	    
 	    Object around() : readMethod() {
-	        trigger("BEFORE READ METHOD", thisJoinPoint);
+            intercept("BEFORE READ METHOD", thisJoinPoint);
 	        Object res = proceed();
-	        trigger("AFTER READ METHOD", thisJoinPoint);	  
+            intercept("AFTER READ METHOD", thisJoinPoint);
 	        return res;
 	    }
 	    
 	    before() : saveMethod() {
-	        trigger("BEFORE SAVE METHOD", thisJoinPoint);
+            intercept("BEFORE SAVE METHOD", thisJoinPoint);
 	    }
 	    
 	    after() : saveMethod() {
-	        trigger("AFTER SAVE METHOD", thisJoinPoint);
+            intercept("AFTER SAVE METHOD", thisJoinPoint);
 	    }
 	    
 	/////////
+
+    protected void intercept(String desc, JoinPoint joinPoint) {
+        setDescription(desc);
+        def listener = ImplicitBpmListener.createInstance()
+        listener.onEvent(this, joinPoint)
+    }
+
+    /////////
 
 	private String description;
 	
@@ -68,12 +76,7 @@ public aspect MvcAspect extends MvcXpi implements ImplicitBpm {
     public String getDescription() {
     	return description;
     }
-    
-    protected void trigger(String desc, JoinPoint joinPoint) {
-    	setDescription(desc);
-        ImplicitBpmListener.onEvent(this, joinPoint);
-    }
-    
+
     public String toString() {
     	return getName()+" "+getDescription();
     }

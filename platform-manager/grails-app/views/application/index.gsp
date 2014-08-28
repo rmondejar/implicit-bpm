@@ -1,10 +1,10 @@
 
-<%@ page import="net.sf.bpm.implicit.DeployUnit" %>
+<%@ page import="net.sf.bpm.implicit.Application" %>
 <!DOCTYPE html>
 <html>
 <head>
     <meta name="layout" content="main">
-    <g:set var="entityName" value="${message(code: 'deployUnit.label', default: 'DeployUnit')}" />
+    <g:set var="entityName" value="${message(code: 'application.label', default: 'Application')}" />
     <title><g:message code="default.list.label" args="[entityName]" /></title>
 </head>
 <body>
@@ -17,7 +17,7 @@
     <div class="hr dotted clearfix"></div>
 </div>
 
-<div id="list-deployUnit" class="content scaffold-list" role="main">
+<div id="list-application" class="content scaffold-list" role="main">
     <g:if test="${flash.message}">
         <div class="alert alert-${flash.messagetype?:'info'} message" role="status"><button data-dismiss="alert" class="close" type="button">×</button>${flash.message}</div>
     </g:if>
@@ -25,23 +25,19 @@
         <thead>
         <tr>
             
-            <g:sortableColumn property="processName" title="${message(code: 'deployUnit.processName.label', default: 'Process Name')}" />
+            <g:sortableColumn property="name" title="${message(code: 'application.name.label', default: 'Name')}" />
             
-            <g:sortableColumn property="deployed" title="${message(code: 'deployUnit.deployed.label', default: 'Deployed')}" />
-            
-            <g:sortableColumn property="running" title="${message(code: 'deployUnit.running.label', default: 'Running')}" />
+            <g:sortableColumn property="location" title="${message(code: 'application.location.label', default: 'Location')}" />
 
         </tr>
         </thead>
         <tbody>
-        <g:each in="${deployUnitInstanceList}" status="i" var="deployUnitInstance">
+        <g:each in="${applicationInstanceList}" status="i" var="applicationInstance">
             <tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
                 
-                <td><g:link action="show" id="${deployUnitInstance.id}">${fieldValue(bean: deployUnitInstance, field: "processName")}</g:link></td>
+                <td><g:link action="show" id="${applicationInstance.id}">${fieldValue(bean: applicationInstance, field: "name")}</g:link></td>
                 
-                <td><g:formatBoolean boolean="${deployUnitInstance.deployed}" /></td>
-                
-                <td><g:formatBoolean boolean="${deployUnitInstance.running}" /></td>
+                <td>${fieldValue(bean: applicationInstance, field: "location")}</td>
 
             </tr>
         </g:each>
@@ -49,7 +45,7 @@
     </table>
     <div class="pagination pagination-right">
         <div class="pagination-content">
-            <g:paginate total="${deployUnitInstanceCount ?: 0}" />
+            <g:paginate total="${applicationInstanceCount ?: 0}" />
         </div>
     </div>
 </div>

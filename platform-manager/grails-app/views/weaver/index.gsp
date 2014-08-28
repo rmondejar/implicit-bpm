@@ -1,10 +1,10 @@
 
-<%@ page import="net.sf.bpm.implicit.RemoteApp" %>
+<%@ page import="net.sf.bpm.implicit.Weaver" %>
 <!DOCTYPE html>
 <html>
 <head>
     <meta name="layout" content="main">
-    <g:set var="entityName" value="${message(code: 'remoteApp.label', default: 'RemoteApp')}" />
+    <g:set var="entityName" value="${message(code: 'weaver.label', default: 'Weaver')}" />
     <title><g:message code="default.list.label" args="[entityName]" /></title>
 </head>
 <body>
@@ -17,35 +17,38 @@
     <div class="hr dotted clearfix"></div>
 </div>
 
-<div id="list-remoteApp" class="content scaffold-list" role="main">
+<div id="list-weaver" class="content scaffold-list" role="main">
     <g:if test="${flash.message}">
         <div class="alert alert-${flash.messagetype?:'info'} message" role="status"><button data-dismiss="alert" class="close" type="button">×</button>${flash.message}</div>
     </g:if>
     <table class="table table-striped table-bordered">
         <thead>
         <tr>
-            
-            <g:sortableColumn property="name" title="${message(code: 'remoteApp.name.label', default: 'Name')}" />
-            
-            <g:sortableColumn property="location" title="${message(code: 'remoteApp.location.label', default: 'Location')}" />
+            <g:sortableColumn property="line" title="${message(code: 'weaver.act.appName.label', default: 'Application')}" />
 
+            <g:sortableColumn property="line" title="${message(code: 'weaver.line.label', default: 'Line')}" />
+            
+            <g:sortableColumn property="active" title="${message(code: 'weaver.active.label', default: 'Active')}" />
+            
         </tr>
         </thead>
         <tbody>
-        <g:each in="${remoteAppInstanceList}" status="i" var="remoteAppInstance">
+        <g:each in="${weaverInstanceList}" status="i" var="weaverInstance">
             <tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
-                
-                <td><g:link action="show" id="${remoteAppInstance.id}">${fieldValue(bean: remoteAppInstance, field: "name")}</g:link></td>
-                
-                <td>${fieldValue(bean: remoteAppInstance, field: "location")}</td>
 
+                <td>${fieldValue(bean: weaverInstance, field: "appName")}</td>
+
+                <td><g:link action="show" id="${weaverInstance.id}">${fieldValue(bean: weaverInstance, field: "line")}</g:link></td>
+
+                <td><g:formatBoolean boolean="${weaverInstance.active}" /></td>
+                
             </tr>
         </g:each>
         </tbody>
     </table>
     <div class="pagination pagination-right">
         <div class="pagination-content">
-            <g:paginate total="${remoteAppInstanceCount ?: 0}" />
+            <g:paginate total="${weaverInstanceCount ?: 0}" />
         </div>
     </div>
 </div>

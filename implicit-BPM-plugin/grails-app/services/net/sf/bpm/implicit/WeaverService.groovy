@@ -5,25 +5,11 @@ import grails.transaction.Transactional
 @Transactional
 class WeaverService {
 
-    def parseDsl(String weaver) {
+    def reflectionService
 
-        def apps = parseAppEntries(weaver)
-        apps.each { appName, line ->
-            parseWeaverEntry(appName, line)
-        }
-    }
+    def parseWeaverEntry(String line) {
 
-    def parseAppEntries(String weaver) {
-
-        def apps = [:]
-
-        //TODO: IMPLEMENT ME
-
-        apps
-    }
-
-    def parseWeaverEntry(String appName, String line) {
-
+        String appName = reflectionService.appInstanceData.name
         List weaverLine = line.split(',')
 
         String actLine = weaverLine.first()
@@ -39,7 +25,7 @@ class WeaverService {
         weaver.act = act
         //weaver.behaviours = bhs
         bhs.eachWithIndex { Behaviour bh, i ->
-            bh.order = i
+            bh.position = i
             weaver.addToBehaviours(bh)
         }
 
@@ -164,24 +150,4 @@ class WeaverService {
       throw new Exception("$msg :\n $line")
     }
 
-    def getApplications(String dsl, String weaverDsl) {
-
-        def apps = []
-        //TODO: IMPLEMENT
-        apps
-    }
-
-    def getWeaverByApp(String dsl, String appName) {
-
-        def weaver = ""
-        //TODO: IMPLEMENT
-        weaver
-    }
-
-    def getWeavers(String dsl) {
-        def weavers = [:]
-        //TODO: IMPLEMENT
-        //EX -> [petstore:"...", accounting:"..."]
-        weavers
-    }
 }

@@ -6,7 +6,7 @@ import grails.transaction.Transactional
 @Transactional
 class ProxyService {
 
-    def ping(RemoteApp remoteApp) {
+    def ping(Application remoteApp) {
         RestBuilder rest = new RestBuilder()
         def resp = rest.get(remoteApp.location + "/proxy/ping"){
             contentType "application/json"
@@ -14,7 +14,7 @@ class ProxyService {
         rest.json
     }
 
-    def inject(RemoteApp remoteApp, String weaverJson) {
+    def inject(Application remoteApp, String weaverJson) {
         RestBuilder rest = new RestBuilder()
         def resp = rest.put(remoteApp.location + "/proxy/inject"){
             contentType "application/json"
@@ -23,7 +23,7 @@ class ProxyService {
         resp.json
     }
 
-    def disable(RemoteApp remoteApp, String weaverJson) {
+    def disable(Application remoteApp, String weaverJson) {
         RestBuilder rest = new RestBuilder()
         def resp = rest.delete(remoteApp.location + "/proxy/disable"){
             contentType "application/json"

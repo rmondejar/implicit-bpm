@@ -1,6 +1,6 @@
 package net.sf.bpm.implicit
 
-class RemoteApp {
+class Application {
 	
 	String name
 	String location

@@ -89,6 +89,34 @@ class OrderController {
         redirect(action: "show", id: orderInstance.id)
     }
 
+    def process(Long id) {
+
+        def orderInstance = Order.get(id)
+        if (!orderInstance) {
+            flash.message = message(code: 'default.not.found.message', args: [message(code: 'order.label', default: 'Order'), id])
+            redirect(action: "list")
+            return
+        }
+
+        if (orderInstance.processed) {
+            flash.message = message(code: 'default.current.done.message', args: [message(code: 'order.label', default: 'Order'), id])
+            redirect(action: "show", id: orderInstance.id)
+            return
+        }
+
+        orderInstance.properties = params
+        orderInstance.processed = true
+
+        if (!orderInstance.save(flush: true)) {
+            redirect(action: "show", id: orderInstance.id)
+            return
+        }
+
+        flash.message = message(code: 'default.updated.message', args: [message(code: 'order.label', default: 'Order'), orderInstance.id])
+        redirect(action: "show", id: orderInstance.id)
+
+    }
+
     def delete(Long id) {
         def orderInstance = Order.get(id)
         if (!orderInstance) {
@@ -107,4 +135,5 @@ class OrderController {
             redirect(action: "show", id: id)
         }
     }
+
 }

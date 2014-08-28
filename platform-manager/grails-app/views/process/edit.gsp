@@ -1,34 +1,34 @@
-<%@ page import="net.sf.bpm.implicit.RemoteApp" %>
+<%@ page import="net.sf.bpm.implicit.Process" %>
 <!DOCTYPE html>
 <html>
 <head>
     <meta name="layout" content="main">
-    <g:set var="entityName" value="${message(code: 'remoteApp.label', default: 'RemoteApp')}" />
-    <title><g:message code="default.edit.label" args="[entityName]" />  ${remoteAppInstance.toString()}</title>
+    <g:set var="entityName" value="${message(code: 'process.label', default: 'Process')}" />
+    <title><g:message code="default.edit.label" args="[entityName]" />  ${processInstance.toString()}</title>
 </head>
 <body>
 <div class="page-header">
     <h1><g:message code="default.edit.label" args="[entityName]" /></h1>
 </div>
 <div class="row-fluid wizard-actions">
-    <g:link class="btn btn-sm btn-purple" action="list"><i class="icon-list"/></i> <g:message code="default.list.label" args="[entityName]" /></g:link>
+    <g:link class="btn btn-sm btn-purple" action="index"><i class="icon-list"/></i> <g:message code="default.list.label" args="[entityName]" /></g:link>
     <g:link class="btn btn-sm btn-info" action="create"><i class="icon-plus"/></i> <g:message code="default.new.label" args="[entityName]" /></g:link>
 </div>
 
-<div id="edit-remoteApp" class="content scaffold-edit" role="main">
+<div id="edit-process" class="content scaffold-edit" role="main">
     <g:if test="${flash.message}">
         <div class="alert alert-${flash.messagetype?:'info'} message" role="status"><button data-dismiss="alert" class="close" type="button">×</button>${flash.message}</div>
     </g:if>
-    <g:hasErrors bean="${remoteAppInstance}">
+    <g:hasErrors bean="${processInstance}">
         <ul class="errors" role="alert">
-            <g:eachError bean="${remoteAppInstance}" var="error">
+            <g:eachError bean="${processInstance}" var="error">
                 <li <g:if test="${error in org.springframework.validation.FieldError}">data-field-id="${error.field}"</g:if>><g:message error="${error}"/></li>
             </g:eachError>
         </ul>
     </g:hasErrors>
     <g:form class="form-horizontal" method="post" >
-    <g:hiddenField name="id" value="${remoteAppInstance?.id}" />
-    <g:hiddenField name="version" value="${remoteAppInstance?.version}" />
+    <g:hiddenField name="id" value="${processInstance?.id}" />
+    <g:hiddenField name="version" value="${processInstance?.version}" />
     <fieldset class="form">
         <g:render template="form"/>
     </fieldset>

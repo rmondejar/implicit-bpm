@@ -51,7 +51,7 @@
 			
 				<g:if test="${orderInstance?.orderLines}">
 					<div class="control-group">
-					<label class="property-key"><g:message code="order.orderLines.label" default="Order Lines" /></label>					
+					<label class="property-key"><g:message code="order.orderLines.label" default="Order Lines" /></label>
 					
 						<g:each in="${orderInstance.orderLines}" var="o">
 						<span class="property-value" aria-labelledby="orderLines-label"><g:link controller="orderLine" action="show" id="${o.id}">${o?.encodeAsHTML()}</g:link></span>
@@ -65,14 +65,20 @@
 			<g:form>		
 				<div class="form-actions">
 					<g:hiddenField name="id" value="${orderInstance?.id}" />
+                    <g:if test="${!orderInstance.processed}">
 					<g:link class="edit btn" action="edit" id="${orderInstance?.id}">
-						<i class="icon-trash icon-pencil"></i> 
+						<i class="icon-pencil"></i>
 						<g:message code="default.button.edit.label" default="Edit" />					
 					</g:link>
+                    <g:link class="btn btn-warning process" action="process" id="${orderInstance?.id}" onclick="return confirm('${message(code: 'default.button.process.confirm.message', default: 'Are you sure?')}');">
+                        <i class="icon-shopping-cart"></i>
+                        <g:message code="default.button.process.label" default="Process" />
+                    </g:link>
 					<button type="submit" name="_action_delete" class="btn btn-danger delete" formnovalidate="" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');">
 						<i class="icon-trash icon-white"></i> 
 						${message(code: 'default.button.delete.label', default: 'Delete')}
-					</button>					
+					</button>
+                    </g:if>
 				</div>
 			</g:form>
 		</div>

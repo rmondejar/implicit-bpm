@@ -42,3 +42,4 @@
 # other
 /*.i*
 /projectFilesBackup*/
+*.db

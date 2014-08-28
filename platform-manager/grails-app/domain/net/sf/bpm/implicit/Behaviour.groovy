@@ -5,7 +5,7 @@ class Behaviour {
     static def connectorEnum = ['perform', 'find', 'save', 'render', 'trigger', 'start', 'sets in']
 
     //behaviour = connector variable element [from controller ] [by variable ]
-    int order
+    int position
     String connector
     String variable
     String element
@@ -24,7 +24,7 @@ class Behaviour {
     }
 
     static constraints = {
-        order blank: false, nullable:false
+        position blank: false, nullable:false
         connector inList : connectorEnum
         variable size: 3..30, blank: false, nullable:false
         element inList: Act.elementEnum

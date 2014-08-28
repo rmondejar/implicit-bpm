@@ -18,19 +18,24 @@
  *****************************************************************************************/
 package net.sf.bpm.implicit
 
-import net.sf.bpm.implicit.util.ImplicitBpmConfigFactory
-
+import org.codehaus.groovy.grails.web.context.ServletContextHolder as SCH
+import org.codehaus.groovy.grails.web.servlet.GrailsApplicationAttributes as GA
 import org.aspectj.lang.JoinPoint
+import net.sf.bpm.implicit.util.ImplicitBpmConfigFactory
 
 class ImplicitBpmListener {
 
-	static ImplicitBpmConfigFactory configFactory
+    static ImplicitBpmConfigFactory configFactory
 
-	static void onEvent(ImplicitBpm proxy, JoinPoint joinPoint) {
+    private ProxyService getProxyService() {
+        def ctx = SCH.servletContext.getAttribute(GA.APPLICATION_CONTEXT)
+        ctx.proxyService
+    }
+
+	def onEvent(ImplicitBpm proxy, JoinPoint joinPoint) {
 		ImplicitBpmConfig config = configFactory.getConfig(proxy)
 		if (config.isEnabled()) {
-			
-			println "Proxy "+proxy+" -> "+joinPoint
+            proxyService.hijacking(proxy,joinPoint)
 		}
 	}
 

@@ -23,6 +23,7 @@ class Order {
 	Date orderDate
 	String customer
 	String deliveryAddress
+    boolean processed
 	
 	static hasMany = [orderLines:OrderLine]
 	

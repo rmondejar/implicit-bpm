@@ -1,21 +1,17 @@
 package net.sf.bpm.implicit
 
-import grails.converters.JSON
-import org.codehaus.groovy.grails.commons.GrailsClass
-
 class MainController {
-
 
     def index() {
 
-        def units = DeployUnit.list()
-        def numUnits = DeployUnit.count()
+        def procs = Process.list()
+        def np = Process.count()
 
-        def apps = RemoteApp.list()
-        int numApps = RemoteApp.count()
+        def apps = Application.list()
+        int na = Application.count()
 
-        [deployUnitInstanceList: units, deployUnitInstanceCount: numUnits,
-         remoteAppInstanceList: apps, remoteAppInstanceCount: numApps]
+        [processInstanceList: procs, processInstanceCount: np,
+         applicationInstanceList: apps, applicationInstanceCount: na]
 	}
 
 }

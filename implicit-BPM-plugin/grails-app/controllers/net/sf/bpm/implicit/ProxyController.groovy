@@ -28,9 +28,11 @@ class ProxyController {
             return
         }
 
-        Weaver weaver = weaverService.createWeaver(params.weaver)
+        Weaver weaver = weaverService.parseWeaverEntry(params.weaver)
+        weaver.active = true
+
         if (!weaver.save(flush: true)) {
-            resp.error = "onAdd"
+            resp.error = "onInject"
             println weaver.errors
         }
         println resp
@@ -48,13 +50,14 @@ class ProxyController {
             return
         }
 
-        Weaver weaver = weaverService.getWeaver(params.weaver)
+        Weaver weaver = Weaver.findByLine(params.weaver)
+        weaver.active = false
 
-       if (!weaver.delete(flush: true)) {
-            resp.error = "onDelete"
+        if (!weaver.save(flush: true)) {
+            resp.error = "onDisable"
             println weaver.errors
         }
-//        println resp
+        println resp
         render resp as JSON
     }
 

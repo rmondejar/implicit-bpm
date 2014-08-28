@@ -10,6 +10,6 @@ class UrlMappings {
         "/"(controller:'main')
         "500"(view:'/error')
 
-        "/rest/sync"(controller:'remoteApp', action: [PATCH: 'sync'])
+        "/rest/sync"(controller:'application', action: [PATCH: 'sync'])
 	}
 }

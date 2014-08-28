@@ -5,90 +5,90 @@ import grails.transaction.Transactional
 import grails.converters.JSON
 
 @Transactional(readOnly = true)
-class RemoteAppController {
+class ApplicationController {
 
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
-        respond RemoteApp.list(params), model:[remoteAppInstanceCount: RemoteApp.count()]
+        respond Application.list(params), model:[applicationInstanceCount: Application.count()]
     }
 
     def list(Integer max) {
         redirect(action: "index", params: [max: max])
     }
 
-    def show(RemoteApp remoteAppInstance) {
-        respond remoteAppInstance
+    def show(Application applicationInstance) {
+        respond applicationInstance
     }
 
     def create() {
-        respond new RemoteApp(params)
+        respond new Application(params)
     }
 
     @Transactional
-    def save(RemoteApp remoteAppInstance) {
-        if (remoteAppInstance == null) {
+    def save(Application applicationInstance) {
+        if (applicationInstance == null) {
             notFound()
             return
         }
 
-        if (remoteAppInstance.hasErrors()) {
-            respond remoteAppInstance.errors, view:'create'
+        if (applicationInstance.hasErrors()) {
+            respond applicationInstance.errors, view:'create'
             return
         }
 
-        remoteAppInstance.save flush:true
+        applicationInstance.save flush:true
 
         request.withFormat {
             form multipartForm {
-                flash.message = message(code: 'default.created.message', args: [message(code: 'remoteApp.label', default: 'RemoteApp'), remoteAppInstance.id])
-                redirect remoteAppInstance
+                flash.message = message(code: 'default.created.message', args: [message(code: 'application.label', default: 'Application'), applicationInstance.id])
+                redirect applicationInstance
             }
-            '*' { respond remoteAppInstance, [status: CREATED] }
+            '*' { respond applicationInstance, [status: CREATED] }
         }
     }
 
-    def edit(RemoteApp remoteAppInstance) {
-        respond remoteAppInstance
+    def edit(Application applicationInstance) {
+        respond applicationInstance
     }
 
     @Transactional
-    def update(RemoteApp remoteAppInstance) {
-        if (remoteAppInstance == null) {
+    def update(Application applicationInstance) {
+        if (applicationInstance == null) {
             notFound()
             return
         }
 
-        if (remoteAppInstance.hasErrors()) {
-            respond remoteAppInstance.errors, view:'edit'
+        if (applicationInstance.hasErrors()) {
+            respond applicationInstance.errors, view:'edit'
             return
         }
 
-        remoteAppInstance.save flush:true
+        applicationInstance.save flush:true
 
         request.withFormat {
             form multipartForm {
-                flash.message = message(code: 'default.updated.message', args: [message(code: 'RemoteApp.label', default: 'RemoteApp'), remoteAppInstance.id])
-                redirect remoteAppInstance
+                flash.message = message(code: 'default.updated.message', args: [message(code: 'Application.label', default: 'Application'), applicationInstance.id])
+                redirect applicationInstance
             }
-            '*'{ respond remoteAppInstance, [status: OK] }
+            '*'{ respond applicationInstance, [status: OK] }
         }
     }
 
     @Transactional
-    def delete(RemoteApp remoteAppInstance) {
+    def delete(Application applicationInstance) {
 
-        if (remoteAppInstance == null) {
+        if (applicationInstance == null) {
             notFound()
             return
         }
 
-        remoteAppInstance.delete flush:true
+        applicationInstance.delete flush:true
 
         request.withFormat {
             form multipartForm {
-                flash.message = message(code: 'default.deleted.message', args: [message(code: 'RemoteApp.label', default: 'RemoteApp'), remoteAppInstance.id])
+                flash.message = message(code: 'default.deleted.message', args: [message(code: 'application.label', default: 'application'), applicationInstance.id])
                 redirect action:"index", method:"GET"
             }
             '*'{ render status: NO_CONTENT }
@@ -98,7 +98,7 @@ class RemoteAppController {
     protected void notFound() {
         request.withFormat {
             form multipartForm {
-                flash.message = message(code: 'default.not.found.message', args: [message(code: 'remoteApp.label', default: 'RemoteApp'), params.id])
+                flash.message = message(code: 'default.not.found.message', args: [message(code: 'application.label', default: 'application'), params.id])
                 redirect action: "index", method: "GET"
             }
             '*'{ render status: NOT_FOUND }
@@ -118,9 +118,9 @@ class RemoteAppController {
         }
         if (!params.metadata) params.metadata = "{}"
 
-        RemoteApp app = RemoteApp.findByName(params.name)
+        Application app = Application.findByName(params.name)
         if (!app) {
-            app = new RemoteApp(params)
+            app = new Application(params)
             resp.isNew = true
         }
         else {

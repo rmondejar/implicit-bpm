@@ -1,17 +1,17 @@
 
-<%@ page import="net.sf.bpm.implicit.DeployUnit" %>
+<%@ page import="net.sf.bpm.implicit.Process" %>
 <!DOCTYPE html>
 <html>
 <head>
     <meta name="layout" content="main">
-    <g:set var="entityName" value="${message(code: 'deployUnit.label', default: 'DeployUnit')}" />
-    <title><g:message code="default.deploy.label" args="[entityName]" /> ${deployUnitInstance.toString()}</title>
+    <g:set var="entityName" value="${message(code: 'deployUnit.label', default: 'Process')}" />
+    <title><g:message code="default.deploy.label" args="[entityName]" /> ${processInstance.toString()}</title>
 </head>
 <body>
 <div class="page-header">
     <h1><g:message code="default.deploy.label" args="[entityName]" /></h1>
 </div>
-<div id="show-deployUnit" class="content scaffold-show" role="main">
+<div id="show-process" class="content scaffold-show" role="main">
     <g:if test="${flash.message}">
         <div class="alert alert-${flash.messagetype?:'info'} message" role="status"><button data-dismiss="alert" class="close" type="button">×</button>${flash.message}</div>
     </g:if>
@@ -27,7 +27,7 @@
                     </div>
                 </fieldset>
                 <div class="form-actions">
-                    <g:hiddenField name="id" value="${deployUnitInstance?.id}" />
+                    <g:hiddenField name="id" value="${processInstance?.id}" />
                     <button type="submit" name="upload" class="btn btn-sm btn-success save">
                         <i class="icon-ok"></i>
                         ${message(code: 'default.button.accept.label', default: 'Accept')}
