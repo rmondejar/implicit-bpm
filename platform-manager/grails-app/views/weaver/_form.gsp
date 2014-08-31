@@ -3,10 +3,11 @@
 
 <div class="control-group ${hasErrors(bean: weaverInstance, field: 'act.appName', 'error')}  col-xs-12">
     <label class="control-label" for="appName">
-        <g:message code="application.name.label" default="Name" />
+        <g:message code="application.label" default="Application" />
+        <span class="required-indicator">*</span>
     </label>
     <div class="controls">
-        <g:textField name="appName" maxlength="50" required="" value="${applicationInstance?.act?.appName}"/>
+        <g:textField name="appName" maxlength="50" required="" value="${weaverInstance?.appName}"/>
 
     </div>
 </div>

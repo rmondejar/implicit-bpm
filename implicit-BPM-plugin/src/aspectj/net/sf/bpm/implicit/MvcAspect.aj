@@ -57,8 +57,8 @@ public aspect MvcAspect extends MvcXpi implements ImplicitBpm {
 
     protected void intercept(String desc, JoinPoint joinPoint) {
         setDescription(desc);
-        def listener = ImplicitBpmListener.createInstance()
-        listener.onEvent(this, joinPoint)
+        ImplicitBpmListener listener = ImplicitBpmListener.createInstance();
+        listener.onEvent(this, joinPoint);
     }
 
     /////////

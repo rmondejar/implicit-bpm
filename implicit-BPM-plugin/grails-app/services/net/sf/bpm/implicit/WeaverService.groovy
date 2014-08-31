@@ -1,8 +1,23 @@
+/*****************************************************************************************
+ * Implicit BPM : a Workflow Weaving Platform
+ * Copyright (C) 2014 Ruben Mondejar
+ *
+ * This library is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 3 of the License, or any later version.
+ *
+ * This library is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with this library; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ *****************************************************************************************/
 package net.sf.bpm.implicit
 
-import grails.transaction.Transactional
-
-@Transactional
 class WeaverService {
 
     def reflectionService
@@ -13,14 +28,14 @@ class WeaverService {
         List weaverLine = line.split(',')
 
         String actLine = weaverLine.first()
-        Act act = parseActEntry(appName, actLine)
+        Act act = parseActEntry(actLine)
 
         String bhsLine = weaverLine.last()
         if (bhsLine.endsWith(';')) bhsLine = bhsLine[0..-2]
         List bhLines = bhsLine.split(" and ")
         List bhs = parseBehaviourEntries(bhLines)
 
-        Weaver weaver = new Weaver()
+        Weaver weaver = new Weaver(appName:appName)
         weaver.line = line
         weaver.act = act
         //weaver.behaviours = bhs
@@ -33,9 +48,9 @@ class WeaverService {
 
     }
 
-    def parseActEntry(appName, actLine) {
+    def parseActEntry(actLine) {
 
-        Act act = new Act(appName:appName)
+        Act act = new Act()
 
         //act = when variable element [from controller ]
         List actParts = actLine.split(" ")
@@ -147,7 +162,6 @@ class WeaverService {
     }
 
     def parseError(String msg, def line) {
-      throw new Exception("$msg :\n $line")
+        throw new Exception("$msg :\n $line")
     }
-
 }

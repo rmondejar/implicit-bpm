@@ -1,7 +1,7 @@
     <g:if test="${weaverInstance?.appName}">
         <div class="control-group col-xs-12">
             <label class="property-key"><g:message code="application.label" default="Application" /></label>
-            <span class="property-value" aria-labelledby="line-label"><g:fieldValue bean="${weaverInstance}" field="appName"/></span>
+            <span class="property-value" aria-labelledby="appName-label"><g:fieldValue bean="${weaverInstance}" field="appName"/></span>
         </div>
     </g:if>
 			

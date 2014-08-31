@@ -32,10 +32,14 @@ class ImplicitBpmListener {
         ctx.proxyService
     }
 
+    static ImplicitBpmListener createInstance() {
+        new ImplicitBpmListener()
+    }
+
 	def onEvent(ImplicitBpm proxy, JoinPoint joinPoint) {
 		ImplicitBpmConfig config = configFactory.getConfig(proxy)
 		if (config.isEnabled()) {
-            proxyService.hijacking(proxy,joinPoint)
+            proxyService.invoke(proxy,joinPoint)
 		}
 	}
 
