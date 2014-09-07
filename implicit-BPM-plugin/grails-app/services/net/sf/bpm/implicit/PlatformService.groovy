@@ -33,7 +33,7 @@ class PlatformService {
         def syncUrl = conf.implicitBpm.platform.rest.sync.url
 
         def info = reflectionService.appInstanceData
-        println "Connecting to $syncUrl \nInfo: $info"
+        println "Connecting to $syncUrl ..."
 
         def http = new HTTPBuilder(syncUrl)
 

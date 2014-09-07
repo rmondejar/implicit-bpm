@@ -23,9 +23,9 @@
   </repositories>
   <dependencies>
     <compile>
-      <dependency group='commons-codec' name='commons-codec' version='1.6' />
-      <dependency group='org.hibernate' name='hibernate-core' version='3.6.10.Final' />
       <dependency group='org.codehaus.groovy.modules.http-builder' name='http-builder' version='0.7.1' />
+      <dependency group='org.hibernate' name='hibernate-core' version='3.6.10.Final' />
+      <dependency group='commons-codec' name='commons-codec' version='1.6' />
     </compile>
     <runtime>
       <dependency group='org.aspectj' name='aspectjrt' version='1.7.4' />
