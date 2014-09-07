@@ -48,10 +48,15 @@ grails.project.dependency.resolution = {
     }
 
     dependencies {
-        // specify dependencies here under either 'build', 'compile', 'runtime', 'test' or 'provided' scopes e.g.
-        // runtime 'mysql:mysql-connector-java:5.1.29'
-        // runtime 'org.postgresql:postgresql:9.3-1101-jdbc41'
-        test "org.grails:grails-datastore-test-support:1.0-grails-2.4"
+        compile ("org.camunda.bpm:camunda-engine:7.1.0-Final") {
+            excludes 'spring-beans'
+        }
+        compile ("org.camunda.bpm.model:camunda-bpmn-model:7.1.0-Final") {
+            excludes 'spring-beans'
+        }
+        runtime ("org.camunda.bpm:camunda-engine-spring:7.1.0-Final") {
+            excludes 'spring-context', 'spring-jdbc', 'spring-orm'
+        }
     }
 
     plugins {
@@ -71,6 +76,7 @@ grails.project.dependency.resolution = {
 
         compile ":rest-client-builder:2.0.3"
         compile ":camunda:0.1.1"
+
 
         // Uncomment these to enable additional asset-pipeline capabilities
         //compile ":sass-asset-pipeline:1.7.4"

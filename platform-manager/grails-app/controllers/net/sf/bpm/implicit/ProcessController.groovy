@@ -120,9 +120,10 @@ class ProcessController {
         print f.size
         print f.contentType
         print f.getClass()
-        String fileContent = f.getInputStream().getText()
+        //String fileContent = f.getInputStream().getText()
+        def fileStream = f.getInputStream()
 
-        def deployResult = workflowService.deployProcess(fileContent, f.originalFilename)
+        def deployResult = workflowService.deployProcess(fileStream, f.originalFilename)
         println deployResult
         if (!deployResult.object) {
             request.withFormat {

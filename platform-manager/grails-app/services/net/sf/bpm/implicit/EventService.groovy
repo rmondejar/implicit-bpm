@@ -18,30 +18,10 @@
  *****************************************************************************************/
 package net.sf.bpm.implicit
 
-class ProxyService {
+import grails.plugins.rest.client.RestBuilder
+import grails.transaction.Transactional
 
-    def invoke(aspect,joinPoint) {
-        //aspect -> when, controller
-
-        println "Proxy invoke "+aspect+" -> "+joinPoint
-
-        List weavers = Weaver.actives.list()
-        println "Proxy weavers : $weavers"
-
-        weavers.each { Weaver weaver ->
-            if (weaver.act.element == 'action') actionAct()
-        }
-
-
-    }
-
-    def actionAct() {
-
-    }
-
-    def taskAct() {
-
-    }
+class EventService {
 
 
 }

@@ -1,6 +1,5 @@
 /*****************************************************************************************
  * Implicit BPM : a Workflow Weaving Platform
- * Copyright (C) 2014 Ruben Mondejar
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -25,6 +24,8 @@ import org.camunda.bpm.engine.impl.persistence.entity.ProcessDefinitionEntity
 import org.camunda.bpm.engine.repository.ProcessDefinition
 import org.camunda.bpm.engine.runtime.ProcessInstance
 import org.camunda.bpm.engine.task.Task
+import org.camunda.bpm.model.bpmn.Bpmn
+import org.camunda.bpm.model.bpmn.instance.UserTask
 
 @Transactional
 class WorkflowService {
@@ -44,15 +45,18 @@ class WorkflowService {
                 .singleResult();
     }
 
-    def deployProcess(fileContent, fileName) {
+     def deployProcess(fileStream, fileName) {
 
         String processName = fileName
         int version = 0
         int revision = 0
 
+        String xmlString = readBpmnFile(fileStream) //task interception mechanism
+        println xmlString
+
         DeploymentEntity d = (DeploymentEntity) repositoryService.createDeployment()
                 .name(fileName.toString())
-                .addString(processName + ".bpmn20.xml", fileContent)
+                .addString(processName + ".bpmn20.xml", xmlString)
                 .deploy()
 
 
@@ -69,6 +73,21 @@ class WorkflowService {
         [object:d, name:processName, version:version, revision:revision]
 
     }
+
+    def readBpmnFile(fileStream) {
+
+        def modelInstance = Bpmn.readModelFromStream(fileStream)
+        println "MODEL : "+ modelInstance.dump()
+        def taskType = modelInstance.model.getType(UserTask.class)
+        if (taskType) {
+            def taskInstances = modelInstance.getModelElementsByType(taskType)
+            taskInstances.each { task ->
+                println "TASK : " + task?.dump()
+            }
+        }
+        Bpmn.convertToString(modelInstance)
+    }
+
 
     def startProcess(String taskId, String taskName, Map vars = [:]) {
         //log.info "STARTING PROCESS $p: ${vars.grep({it.key!='__files__'})}"
@@ -112,7 +131,6 @@ class WorkflowService {
 
         def existingVars = taskService.getVariables(taskid)
 
-        println "SAVE TASK $taskid: complete=$complete: $vars"
         println "SAVE TASK $taskid: complete=$complete: $vars"
 
         removeFromArrays(taskid, existingVars, vars)
@@ -193,11 +211,8 @@ class WorkflowService {
         def data = [:]
 
         def histvars = historyService.createHistoricDetailQuery().variableUpdates().processInstanceId(processInstance.id).list()
-        //		println "HISTORICS VARIABLES: $histvars"
-        histvars = histvars.groupBy({ it.activityInstanceId })
 
-        //		println hist
-        //		println "HISTORICS VARIABLES: $histvars"
+        histvars = histvars.groupBy({ it.activityInstanceId })
         def pv = processInstance.processVariables
 
         hist.each { acid, h ->
@@ -206,9 +221,7 @@ class WorkflowService {
             try {
                 def groupedhv = histvars[h.id]?.groupBy({ it.name }) ?: [:] // full hist
                 def hv = groupedhv?.collectEntries({ k, v -> [k, v[-1]] }) ?: [:]
-// only one value per variable and task
-                //				println "HISTORICS (TOTS): $h.activityName --> " + hv?._tasks?.value
-                //				println "HISTORICS: $h.activityName --> " + hv?._tasks?.value?."$did"
+
                 data[did]['_values'] = getTaskData(hv, hv?._tasks?.value?."$did"?.'_formdata')
                 data[did]['_user'] = hv?._tasks?.value?."$did"?._user
                 data[did]['_historic'] = groupedhv

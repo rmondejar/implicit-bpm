@@ -37,22 +37,33 @@ class ProxyService {
 
     def inject(Application a, Weaver w) {
 
-        String url = a.location + "/proxy/inject?weaver=" + w.line
+        String url = a.location + "/proxy/inject?weaver=${w.line}"
         RestBuilder rest = new RestBuilder()
         def resp = rest.put(url){
             contentType "application/x-www-form-urlencoded"
         }
-        println "REST ${resp.dump()}"
+        //println "REST ${resp.dump()}"
         resp.json
     }
 
     def disable(Application a, Weaver w) {
 
-        String url = a.location + "/proxy/disable?weaver=" + w.line
+        String url = a.location + "/proxy/disable?weaver=${w.line}"
         RestBuilder rest = new RestBuilder()
         def resp = rest.delete(url){
             contentType "application/x-www-form-urlencoded"
         }
+        resp.json
+    }
+
+    def notify(Application a, Act act) {
+
+        String url = a.location + "/proxy/notify?act=$act"
+        RestBuilder rest = new RestBuilder()
+        def resp = rest.put(url){
+            contentType "application/x-www-form-urlencoded"
+        }
+        //println "REST ${resp.dump()}"
         resp.json
     }
 }

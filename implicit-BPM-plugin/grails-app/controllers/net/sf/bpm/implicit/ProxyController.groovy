@@ -27,6 +27,7 @@ class ProxyController {
     def weaverService
     def platformService
     def reflectionService
+    def proxyService
 
     def ping() {
 
@@ -86,5 +87,10 @@ class ProxyController {
         def resp = platformService.sync()
 
         render resp as JSON
+    }
+
+    def nofify() {
+
+        proxyService.taskCase()
     }
 }
