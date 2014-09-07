@@ -23,7 +23,11 @@ class Item {
     String name
     String description
     float unitCost
-	
+
+    String toString() {
+        name
+    }
+
 	static mapping = {
 		version false
 	}
