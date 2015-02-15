@@ -48,15 +48,7 @@ grails.project.dependency.resolution = {
     }
 
     dependencies {
-        compile ("org.camunda.bpm:camunda-engine:7.1.0-Final") {
-            excludes 'spring-beans'
-        }
-        compile ("org.camunda.bpm.model:camunda-bpmn-model:7.1.0-Final") {
-            excludes 'spring-beans'
-        }
-        runtime ("org.camunda.bpm:camunda-engine-spring:7.1.0-Final") {
-            excludes 'spring-context', 'spring-jdbc', 'spring-orm'
-        }
+
     }
 
     plugins {
@@ -75,7 +67,7 @@ grails.project.dependency.resolution = {
         runtime ":jquery:1.11.1"
 
         compile ":rest-client-builder:2.0.3"
-        compile ":camunda:0.1.1"
+        compile ":camunda:0.4.0"
 
 
         // Uncomment these to enable additional asset-pipeline capabilities

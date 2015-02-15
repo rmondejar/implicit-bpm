@@ -25,7 +25,7 @@ import static groovyx.net.http.ContentType.JSON
 
 class PlatformService {
 
-    def reflectionService
+    ReflectionService reflectionService
 
     def sync() {
 
