@@ -66,14 +66,9 @@ grails.project.dependency.resolution = {
         //runtime ":database-migration:1.4.0"
         runtime ":jquery:1.11.1"
 
-        compile ":rest-client-builder:2.0.3"
+        // other plugins
+        compile ":rest-client-builder:2.1.0"
         compile ":camunda:0.4.0"
 
-
-        // Uncomment these to enable additional asset-pipeline capabilities
-        //compile ":sass-asset-pipeline:1.7.4"
-        //compile ":less-asset-pipeline:1.7.0"
-        //compile ":coffee-asset-pipeline:1.7.0"
-        //compile ":handlebars-asset-pipeline:1.3.0.3"
     }
 }
