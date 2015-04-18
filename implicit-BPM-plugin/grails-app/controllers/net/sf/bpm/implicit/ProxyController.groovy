@@ -19,6 +19,8 @@
 package net.sf.bpm.implicit
 
 import grails.converters.JSON
+import groovy.json.JsonSlurper
+
 
 class ProxyController {
 
@@ -41,7 +43,43 @@ class ProxyController {
         Map resp = [:]
 
         println "INJECT $params"
-        if (!params.weaver) {
+        println "INJECT $request.JSON"
+
+        def jsonObj = request.JSON
+        def w = new Weaver()
+        w.appName = jsonObj.appName
+        w.inputDSL = jsonObj.inputDSL
+        def acts = [] as Set
+        def behaviours = [] as Set
+        jsonObj.acts.each{
+            def a = new Act()
+            a.id = it.id
+            a.element = it.element
+            a.fromController = it.fromController
+            a.variable = it.variable
+            a.when = it.when
+            println "the new act $a"
+            acts << a
+        }
+        w.acts = acts
+        jsonObj.behaviours.each{
+            behaviours << new Behaviour(it)
+        }
+        w.behaviours = behaviours
+        /*
+        //Set the domain back to the jsonObj
+
+        jsonObj.acts = acts
+        jsonObj.behaviours = behaviours
+
+        //Bind to catalog
+        def w = new Weaver(jsonObj)
+        //Synonymous to new Catalog(params) but here you cannot use params.
+*/
+        println "MAPPED $w"
+
+
+        /*if (!params.weaver) {
             resp.error = "params"
             render resp as JSON
             return
@@ -56,6 +94,7 @@ class ProxyController {
         }
         resp.inject = "ok"
         println resp
+        */
         render resp as JSON
     }
 

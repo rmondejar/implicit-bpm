@@ -25,7 +25,7 @@ import grails.transaction.Transactional
 @Transactional(readOnly = true)
 class WeaverController {
 
-    static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
+    static allowedMethods = [save: "POST", update: "PUT", delete: "POST"]
 
     def weaverService
     def proxyService
@@ -51,7 +51,7 @@ class WeaverController {
             return
         }
 
-        weaverInstance = weaverService.parseWeaverEntry(params.appName, params.line.trim())
+        weaverInstance = weaverService.parseDSL(params.inputDSL.trim())
 
 
         if (weaverInstance.hasErrors()) {
@@ -86,7 +86,7 @@ class WeaverController {
             return
         }
 
-        Weaver weaverData = weaverService.parseWeaverEntry(params.appName, params.line.trim())
+        Weaver weaverData = weaverService.parseDSL(params.inputDSL.trim())
         weaverInstance.properties = weaverData.properties
         weaverInstance.save flush: true
 
@@ -109,16 +109,20 @@ class WeaverController {
 
         weaverInstance.delete flush: true
 
-        request.withFormat {
+        /*request.withFormat {
             form multipartForm {
                 flash.message = message(code: 'default.deleted.message', args: [message(code: 'weaver.label', default: 'Weaver'), weaverInstance.id])
                 redirect action: "index", method: "GET"
             }
             '*' { render status: NO_CONTENT }
-        }
+        }*/
+        
+        redirect action: "index"
+
     }
 
     protected void notFound() {
+        println "NOT FOUND!!"
         request.withFormat {
             form multipartForm {
                 flash.message = message(code: 'default.not.found.message', args: [message(code: 'weaver.label', default: 'Weaver'), params.id])
@@ -126,12 +130,15 @@ class WeaverController {
             }
             '*' { render status: NOT_FOUND }
         }
+
+        redirect (action: "index")
+
     }
 
     def activate(Weaver weaverInstance) {
 
         println "ACTIVATE ${weaverInstance.dump()}"
-        Application app = Application.findByName(weaverInstance.appName)
+        Application app = Application.findByName(weaverInstance.appName.toLowerCase())
         def resp = proxyService.inject(app, weaverInstance)
         println resp
 
@@ -141,16 +148,18 @@ class WeaverController {
         request.withFormat {
             form multipartForm {
                 flash.message = message(code: 'default.updated.message', args: [message(code: 'weaver.label', default: 'Weaver'), weaverInstance.id])
-                redirect action: "index", method: "GET"
+                redirect action: "index"
             }
             '*' { respond weaverInstance, [status: OK] }
         }
+
+        redirect (action: "index")
 
     }
 
     def disable(Weaver weaverInstance) {
 
-        Application app = Application.findByName(weaverInstance.appName)
+        Application app = Application.findByName(weaverInstance.appName.toLowerCase())
         def resp = proxyService.disable(app, weaverInstance)
         println resp
 
@@ -164,6 +173,9 @@ class WeaverController {
             }
             '*' { respond weaverInstance, [status: OK] }
         }
+
+        redirect (action: "index")
+
 
     }
 }

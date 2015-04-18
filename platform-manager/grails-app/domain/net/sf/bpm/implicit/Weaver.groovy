@@ -21,11 +21,10 @@ package net.sf.bpm.implicit
 class Weaver {
 
     String appName
-    String line
+    String inputDSL
     boolean active
 
-    static hasOne = [act:Act]
-    static hasMany = [behaviours:Behaviour]
+    static hasMany = [acts: Act, behaviours:Behaviour]
 
     static namedQueries = {
         actives {
@@ -37,18 +36,21 @@ class Weaver {
         behaviours?.sort {it.position}
     }
 
-    String toString() {
+    /*tring toString() {
         "$act, ${behaviours*.toString().join(" and ")};"
-    }
+    }*/
 
     static mapping = {
         table 'IBPM_WEAVER_ENTRY'
         version false
+        acts lazy: false
+        behaviours lazy: false
     }
 
     static constraints = {
 
-        appName size: 3..50, blank: false, nullable:false
-        line size: 10..300, blank: false, nullable:false
+        /*appName size: 3..50, blank: false, nullable:false
+        line size: 10..300, blank: false, nullable:false*/
+        inputDSL size: 10..1000, blank: false
     }
 }

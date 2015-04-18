@@ -18,39 +18,26 @@
  *****************************************************************************************/
 package net.sf.bpm.implicit
 
-class Weaver {
+class Application {
+	
+	String name
+	String location
+    boolean isWar
+    String verNum
+    String framework
+	String metadata //JSON
+	
+	static mapping = {
+		version false
 
-    String appName
-    String line
-    String inputDSL
-    boolean active
-
-   // static hasOne = [act:Act]
-    static hasMany = [acts: Act, behaviours:Behaviour]
-
-    static namedQueries = {
-        actives {
-            eq 'active', true
-        }
-    }
-
-    List getSortedBehaviours() {
-        behaviours?.sort {it.position}
-    }
-
-    String toString() {
-        "${acts*.toString().join( ", ")};" +
-                    "${behaviours*.toString().join(" and ")};"
-    }
-
-    static mapping = {
-        table 'IBPM_WEAVER_ENTRY'
-        version false
-    }
+	}
 
     static constraints = {
-
-        appName size: 3..50, blank: false, nullable:false
-        line size: 10..300, blank: false, nullable:false
+		
+		name size: 3..100, blank: false, unique: true
+        location url: "localhost(:(\\d{1,5}))?", blank: false
+        verNum size: 1..15, blank: true, nullable: true
+        framework size: 1..30, blank: true, nullable: true
+        metadata size:1..3000, nullable: true, blank: true
     }
 }

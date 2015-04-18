@@ -25,7 +25,7 @@ import grails.converters.JSON
 @Transactional(readOnly = true)
 class ApplicationController {
 
-    static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
+    static allowedMethods = [save: "POST", update: "PUT", delete: "POST"]
 
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
@@ -104,13 +104,16 @@ class ApplicationController {
 
         applicationInstance.delete flush:true
 
-        request.withFormat {
+        /*request.withFormat {
             form multipartForm {
                 flash.message = message(code: 'default.deleted.message', args: [message(code: 'application.label', default: 'application'), applicationInstance.id])
                 redirect action:"index", method:"GET"
             }
             '*'{ render status: NO_CONTENT }
         }
+        */
+
+        redirect action: "index"
     }
 
     protected void notFound() {

@@ -38,7 +38,7 @@
 
                 <td>${fieldValue(bean: weaverInstance, field: "appName")}</td>
 
-                <td><g:link action="show" id="${weaverInstance.id}">${fieldValue(bean: weaverInstance, field: "line")}</g:link></td>
+                <td><g:link action="show" id="${weaverInstance.id}">${fieldValue(bean: weaverInstance, field: "inputDSL")}</g:link></td>
 
                 <td><g:formatBoolean boolean="${weaverInstance.active}" /></td>
                 

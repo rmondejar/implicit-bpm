@@ -18,8 +18,10 @@
  *****************************************************************************************/
 package net.sf.bpm.implicit
 
+import grails.converters.JSON
 import grails.plugins.rest.client.RestBuilder
 import grails.transaction.Transactional
+
 
 @Transactional
 class ProxyService {
@@ -36,11 +38,13 @@ class ProxyService {
     }
 
     def inject(Application a, Weaver w) {
-
-        String url = a.location + "/proxy/inject?weaver=${w.line}"
+        String url = a.location + "/proxy/inject"
         RestBuilder rest = new RestBuilder()
+
         def resp = rest.put(url){
-            contentType "application/x-www-form-urlencoded"
+            //contentType "application/x-www-form-urlencoded"
+            contentType "application/vnd.org.jfrog.artifactory.security.Group+json"
+            json w as JSON
         }
         //println "REST ${resp.dump()}"
         resp.json
@@ -48,7 +52,7 @@ class ProxyService {
 
     def disable(Application a, Weaver w) {
 
-        String url = a.location + "/proxy/disable?weaver=${w.line}"
+        String url = a.location + "/proxy/disable?weaver=${w.getAppName()}"
         RestBuilder rest = new RestBuilder()
         def resp = rest.delete(url){
             contentType "application/x-www-form-urlencoded"
