@@ -1,12 +1,12 @@
-package net.sf.bpm.implicit
+/*package net.sf.bpm.implicit
 
 import grails.test.mixin.Mock
 import grails.test.mixin.TestFor
 import spock.lang.Specification
 
-/**
- * See the API for {@link grails.test.mixin.services.ServiceUnitTestMixin} for usage instructions
- */
+
+ See the API for {@link grails.test.mixin.services.ServiceUnitTestMixin} for usage instructions
+
 @TestFor(WeaverService)
 @Mock([Act,Behaviour,Weaver])
 class WeaverServiceSpec extends Specification {
@@ -98,3 +98,4 @@ class WeaverServiceSpec extends Specification {
     }
 
 }
+*/

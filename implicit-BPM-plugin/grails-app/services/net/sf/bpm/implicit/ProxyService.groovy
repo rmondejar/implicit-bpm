@@ -18,18 +18,61 @@
  *****************************************************************************************/
 package net.sf.bpm.implicit
 
+import grails.gsp.PageRenderer
+import org.codehaus.groovy.grails.commons.DefaultGrailsDomainClass
+import org.codehaus.groovy.grails.commons.GrailsDomainClass
+import org.springframework.web.context.request.RequestContextHolder
+import org.codehaus.groovy.grails.web.util.WebUtils
+
+import javax.servlet.http.HttpServletRequest
+import javax.servlet.http.HttpServletResponse
+import javax.servlet.http.HttpSession
+
 class ProxyService {
+
+    ReflectionService reflectionService
+    PageRenderer groovyPageRenderer
+
+
 
     def invoke(aspect,joinPoint) {
         //aspect -> when, controller
 
-        println "Proxy invoke "+aspect+" -> "+joinPoint
+        println "Proxy invoke "+aspect+" -> "+joinPoint;
 
         List weavers = Weaver.actives.list()
         println "Proxy weavers : $weavers"
 
+        def modelInfo = reflectionService.modelClassNames
+        modelInfo.each{k, Class v->
+            println k
+            println v
+            /*def newDomainObject = v.newInstance()
+            println newDomainObject*/
+        }
+
         weavers.each { Weaver weaver ->
-            if (weaver.act.element == 'action') actionAct()
+            //println weaver
+            weaver.behaviours.each {
+                //println it
+                if(it.connector == "render"){
+                    reflectionService.viewInfo.each { k, v ->
+                        v.each{ viewName ->
+                            if (viewName == it.variable){
+
+                                /*String html = groovyPageRenderer.render(view: viewName, model: k)
+                                HttpServletResponse response = WebUtils.retrieveGrailsWebRequest().getCurrentResponse()
+                                response.setStatus(200)
+                                response.setContentType('text/html')
+                                response.writer.write(html)
+                                response.sendRedirect(html)*/
+
+
+                            }
+                        }
+                    }
+                }
+            }
         }
 
 

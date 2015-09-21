@@ -18,35 +18,26 @@
  *****************************************************************************************/
 package net.sf.bpm.implicit
 
-class Behaviour {
+class Application {
+	
+	String name
+	String location
+    boolean isWar
+    String verNum
+    String framework
+	String metadata //JSON
+	
+	static mapping = {
+		version false
 
-    static def connectorEnum = ['perform', 'find', 'save', 'render', 'trigger', 'start', 'sets in', 'sets']
-
-    //behaviour = connector variable element [from controller ] [by variable ]
-    int position
-    String connector
-    String variable
-    String element
-    String fromController
-    String byVariable
-
-    static belongsTo = [weaver: Weaver]
-
-    String toString() {
-        "$connector \"$variable\" $element${fromController?" from $fromController":''}${byVariable?" by \"$byVariable\"":''}"
-    }
-
-    static mapping = {
-        table 'IBPM_BEHAVIOUR_ENTRY'
-        version false
-    }
+	}
 
     static constraints = {
-        position blank: false, nullable:true
-        connector inList : connectorEnum
-        variable size: 3..30, blank: false, nullable:true
-        element inList: Act.elementEnum
-        fromController size: 3..30, blank: true, nullable:true
-        byVariable size: 3..30, blank: true, nullable:true
+		
+		name size: 3..100, blank: false, unique: true
+        location url: "localhost(:(\\d{1,5}))?", blank: false
+        verNum size: 1..15, blank: true, nullable: true
+        framework size: 1..30, blank: true, nullable: true
+        metadata size:1..3000, nullable: true, blank: true
     }
 }

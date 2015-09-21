@@ -19,6 +19,8 @@
 package net.sf.bpm.implicit;
 
 import org.aspectj.lang.JoinPoint;
+import org.aspectj.lang.reflect.CodeSignature;
+import org.aspectj.lang.reflect.MethodSignature;
 
 public aspect MvcAspect extends MvcXpi implements ImplicitBpm {
 	
@@ -56,6 +58,10 @@ public aspect MvcAspect extends MvcXpi implements ImplicitBpm {
 	/////////
 
     protected void intercept(String desc, JoinPoint joinPoint) {
+        MethodSignature signature = (MethodSignature)joinPoint.getSignature();
+        //System.out.printf(joinPoint.getTarget().getClass().getName());
+        //System.out.printf(signature.getMethod().getName());
+
         setDescription(desc);
         ImplicitBpmListener listener = ImplicitBpmListener.createInstance();
         listener.onEvent(this, joinPoint);

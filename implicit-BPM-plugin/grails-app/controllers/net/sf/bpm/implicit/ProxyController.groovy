@@ -19,6 +19,8 @@
 package net.sf.bpm.implicit
 
 import grails.converters.JSON
+import groovy.json.JsonSlurper
+
 
 class ProxyController {
 
@@ -41,21 +43,54 @@ class ProxyController {
         Map resp = [:]
 
         println "INJECT $params"
-        if (!params.weaver) {
+        println "INJECT $request.JSON"
+
+        def jsonObj = request.JSON
+        def w = new Weaver(appName: jsonObj.appName, inputDSL: jsonObj.inputDSL, active: true).save flush: true
+       jsonObj.acts.each{
+            def a = new Act()
+            a.element = it.element
+            a.fromController = it.fromController
+            a.variable = it.variable
+            a.when = it.when
+            println "the new act $a"
+            w.addToActs(a)
+        }
+        jsonObj.behaviours.each{
+            w.addToBehaviours(new Behaviour(it))
+        }
+
+
+
+
+        /*
+        //Set the domain back to the jsonObj
+
+        jsonObj.acts = acts
+        jsonObj.behaviours = behaviours
+
+        //Bind to catalog
+        def w = new Weaver(jsonObj)
+        //Synonymous to new Catalog(params) but here you cannot use params.
+
+        /*if (!params.weaver) {
             resp.error = "params"
             render resp as JSON
             return
         }
 
         Weaver weaver = weaverService.parseWeaverEntry(params.weaver)
-        weaver.active = true
+        */
+        //w.active = true
+        println "MAPPED $w"
 
-        if (!weaver.save(flush: true)) {
+        /*if (!w.save(flush: true)) {
             resp.error = "onInject"
-            println weaver.errors
+            println w.errors
         }
-        resp.inject = "ok"
+        //resp.inject = "ok"
         println resp
+*/
         render resp as JSON
     }
 

@@ -21,7 +21,7 @@ package net.sf.bpm.implicit
 class Act {
 
     static def elementEnum = ['action', 'view', 'event', 'task', 'domain', 'attribute', 'flow']
-    static def whenEnum = ['Before', 'Instead of', 'After']
+    static def whenEnum = ['Before', 'Instead of', 'After', 'Instead', 'of']
 
     //act = when variable element [from controller ]
     String when
@@ -42,7 +42,7 @@ class Act {
 
     static constraints = {
         when isList: whenEnum
-        variable size: 3..30, blank: false, nullable:false
+        variable size: 3..30, blank: false, nullable:true
         element inList: elementEnum
         fromController size: 3..30, blank: true, nullable:true
     }

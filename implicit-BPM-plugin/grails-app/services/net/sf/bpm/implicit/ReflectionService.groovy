@@ -48,7 +48,18 @@ class ReflectionService {
         data
     }
 
+    def getModelClassNames(){
+        def modelClassNames = [:]
 
+        grailsApplication.domainClasses.each{ DefaultGrailsDomainClass domain ->
+
+            Class domainClass = domain.clazz
+            String logicalDomainName = domain.logicalPropertyName
+            modelClassNames[logicalDomainName] = domainClass
+        }
+
+        modelClassNames
+    }
 
     def getModelInfo() {
 
