@@ -18,8 +18,6 @@
  *****************************************************************************************/
 package net.sf.bpm.implicit
 
-import groovy.util.ConfigObject
-
 class ImplicitBpmConfig {
 
 	private ConfigObject config

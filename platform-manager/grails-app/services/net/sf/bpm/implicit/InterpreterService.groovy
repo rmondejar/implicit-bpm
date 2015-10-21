@@ -1,10 +1,5 @@
 package net.sf.bpm.implicit
 
-import grails.transaction.Transactional
-import groovy.transform.ToString
-
-@ToString(includeNames=true, ignoreNulls = true)
-@Transactional
 class InterpreterService {
 
     def whenList =  DSLWhenEnum.values().collectEntries{[(it.name()) : it]}
@@ -28,7 +23,8 @@ class InterpreterService {
         def newBehave = new DSLBehaviour(connector: theConnector)
         appList[-1].act[-1].behaviour << newBehave
         //from(theFrom)
-        appList[-1].act[-1].controller = theFrom
+        if(!appList[-1].act[-1].controller)
+            appList[-1].act[-1].controller = theFrom
         this
 
     }
@@ -58,6 +54,7 @@ class InterpreterService {
         this
     }
 
+
     /* Accessing the whens */
     def propertyMissing(String name){
         /* the first row of an Application has to be handled differently */
@@ -73,8 +70,8 @@ class InterpreterService {
             defineWhen(name)
         }
 
-        if ( name == DSLWhenEnum.Instead.toString() ){
-            defineWhen(DSLWhenEnum.Instead)
+        if(args.length == 1 && whenList.containsKey(args[0])){
+            defineWhen(args[0])
         }
 
         /* starting with the first line of DSL:
@@ -139,30 +136,44 @@ class InterpreterService {
     def assignValues(){
         for(def app : appList){
             def weaver = new Weaver()
+
             weaver.appName = app.name
             for(DSLAct newAct : app.act){
                 Act act = new Act()
                 act.with {
-                    when = newAct.when
+                    when = newAct.when.toLowerCase()
                     element = newAct.element
-                    fromController = newAct.controller
-                    variable = newAct.varName
-                    for(DSLBehaviour behaviour : newAct.behaviour){
-                        Behaviour b = new Behaviour()
-                        b.with {
-                            fromController = behaviour.controller
-                            element = behaviour.element
-                            byVariable = behaviour.byVar
-                            connector = behaviour.connector
-                            variable = behaviour.varName
-                        }
-                        weaver.addToBehaviours b
-                    }
+                    fromController = newAct.controller?.toLowerCase()
+                    variable = decapitalize(newAct.varName)
                 }
                 weaver.addToActs act
+                int positionForB = 1
+                for(DSLBehaviour behaviour : newAct.behaviour){
+                    Behaviour b = new Behaviour()
+                    b.with {
+                        fromController = behaviour.controller?.toLowerCase()
+                        element = behaviour.element
+                        byVariable = decapitalize(behaviour.byVar)
+                        connector = behaviour.connector
+                        variable = decapitalize(behaviour.varName)
+                        position = positionForB
+                        positionForB++
+                    }
+                    act.addToBehaviours b
+                }
             }
+            println weaver
             workflow.addToWeavers weaver
         }
     }
+
+    public static String decapitalize(String string){
+    if (string == null || string.length() == 0) {
+        return string;
+    }
+    def c = string.toCharArray();
+    c[0] = Character.toLowerCase(c[0]);
+    return new String(c);
+}
 
 }

@@ -18,9 +18,12 @@
  *****************************************************************************************/
 package net.sf.bpm.implicit
 
+import groovy.transform.ToString
+
+@ToString(includeNames=true, ignoreNulls = false)
 class Behaviour {
 
-    static def connectorEnum = ['perform', 'find', 'save', 'render', 'trigger', 'start', 'sets in']
+    static def connectorEnum = ['perform', 'find', 'save', 'render', 'trigger', 'start', 'sets in', 'set']
 
     //behaviour = connector variable element [from controller ] [by variable ]
     int position
@@ -30,7 +33,7 @@ class Behaviour {
     String fromController
     String byVariable
 
-    static belongsTo = [weaver:Weaver]
+    static belongsTo = [act:Act]
 
     String toString() {
         "$connector \"$variable\" $element${fromController?" from $fromController":''}${byVariable?" by \"$byVariable\"":''}"

@@ -19,6 +19,7 @@
 package petstore
 
 import org.springframework.dao.DataIntegrityViolationException
+import org.springframework.web.servlet.ModelAndView
 
 class OrderController {
 
@@ -36,6 +37,8 @@ class OrderController {
     def create() {
         [orderInstance: new Order(params)]
     }
+
+
 
     def save() {
         def orderInstance = new Order(params)
@@ -134,6 +137,10 @@ class OrderController {
             flash.message = message(code: 'default.not.deleted.message', args: [message(code: 'order.label', default: 'Order'), id])
             redirect(action: "show", id: id)
         }
+    }
+
+    def newAction(){
+        println "newAction - Order"
     }
 
 }

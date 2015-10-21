@@ -12,14 +12,15 @@ class BootStrap {
         def inputDSL = '''
             PurchaseWorkflow {
                 on PetStore :
-                         After "Save Purchase" task, render "list" view;
-                         Instead of "Process" action from "Order", trigger "init" event;
+                 After "list" view from "Item", find "Item" element by "name" and set "exist" attribute and render "list" view from "Order";
+                 And replace "create" view from "Item", start "newAction" action from "Order" and render "create" view from "Order";
+                 And after "list" view from "Order", save "Item" element;
             }
         '''
 
         def weaver = weaverService.parseDSL(inputDSL)
-        println weaver
-        weaver.save(flush: true, failOnError: true)
+       weaver.save(flush: true, failOnError: true)
+       println weaver
 
     }
     def destroy = {

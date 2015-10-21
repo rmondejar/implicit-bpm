@@ -20,7 +20,7 @@ package petstore
 
 class Item {
 
-    String name
+    String name = "Name"
     String description
     float unitCost
 

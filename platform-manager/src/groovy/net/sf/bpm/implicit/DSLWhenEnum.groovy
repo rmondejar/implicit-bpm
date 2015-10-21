@@ -1,8 +1,7 @@
 package net.sf.bpm.implicit
 
 public enum DSLWhenEnum {
-    Before,
-    After,
-    Instead,
-    of
+    Before, before,
+    After, after,
+    Replace, replace
 }

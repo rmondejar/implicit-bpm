@@ -18,10 +18,11 @@
  *****************************************************************************************/
 package net.sf.bpm.implicit
 
+
 class Act {
 
-    static def elementEnum = ['action', 'view', 'event', 'task', 'domain', 'attribute', 'flow']
-    static def whenEnum = ['Before', 'Instead of', 'After', 'Instead', 'of']
+    static def elementEnum = ['action', 'view', 'event', 'task', 'domain', 'attribute', 'flow', 'element']
+    static def whenEnum = ['Before', 'Instead of', 'After', 'Instead', 'of', 'Replace']
 
     //act = when variable element [from controller ]
     String when
@@ -29,7 +30,11 @@ class Act {
     String element
     String fromController
 
+    List behaviours
+
     static belongsTo = [weaver:Weaver]
+    static hasMany = [behaviours:Behaviour]
+
 
     String toString() {
         "$when \"$variable\" $element${fromController?" from $fromController":''}"
@@ -45,5 +50,6 @@ class Act {
         variable size: 3..30, blank: false, nullable:true
         element inList: elementEnum
         fromController size: 3..30, blank: true, nullable:true
+        behaviours lazy: false, sort: 'position'
     }
 }

@@ -33,7 +33,6 @@
 				<tbody>
 				<g:each in="${orderInstanceList}" status="i" var="orderInstance">
 					<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
-					
 						<td><g:link action="show" id="${orderInstance.id}">${fieldValue(bean: orderInstance, field: "customer")}</g:link></td>
 					
 						<td>${fieldValue(bean: orderInstance, field: "deliveryAddress")}</td>

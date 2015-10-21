@@ -32,6 +32,8 @@ public abstract aspect MvcXpi {
     
     public pointcut readMethod() : inModel() && execution(public Object get(..));
 
+    public pointcut methodPoint() : inController() && execution(public * *.*(..));
+
     //More CRUD Methods (...) 
     
     public pointcut inView() : within(*..gsp_*_gsp);    

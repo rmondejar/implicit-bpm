@@ -18,9 +18,6 @@
  *****************************************************************************************/
 package net.sf.bpm.implicit
 
-import grails.plugins.rest.client.RestBuilder
-import grails.transaction.Transactional
-
 class EventService {
 
 

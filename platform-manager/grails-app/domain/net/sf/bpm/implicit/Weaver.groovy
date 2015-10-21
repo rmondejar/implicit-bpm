@@ -18,13 +18,16 @@
  *****************************************************************************************/
 package net.sf.bpm.implicit
 
+import groovy.transform.ToString
+
+@ToString(includeNames=true, ignoreNulls = false)
 class Weaver {
 
     String appName
     String inputDSL
     boolean active
 
-    static hasMany = [acts: Act, behaviours:Behaviour]
+    static hasMany = [acts: Act]
 
     static namedQueries = {
         actives {
@@ -32,9 +35,9 @@ class Weaver {
         }
     }
 
-    List getSortedBehaviours() {
+   /* List getSortedBehaviours() {
         behaviours?.sort {it.position}
-    }
+    }*/
 
     /*tring toString() {
         "$act, ${behaviours*.toString().join(" and ")};"
@@ -44,7 +47,7 @@ class Weaver {
         table 'IBPM_WEAVER_ENTRY'
         version false
         acts lazy: false
-        behaviours lazy: false
+
     }
 
     static constraints = {

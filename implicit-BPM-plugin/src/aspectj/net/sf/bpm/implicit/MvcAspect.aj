@@ -23,20 +23,12 @@ import org.aspectj.lang.reflect.CodeSignature;
 import org.aspectj.lang.reflect.MethodSignature;
 
 public aspect MvcAspect extends MvcXpi implements ImplicitBpm {
-	
-//	  before() : controllerAction() {
-//	        trigger("BEFORE CONTROLLER ACTION", thisJoinPoint);
-//	    }
-	    
-//	    after() : controllerAction() {
-//	    	
-//	        trigger("AFTER CONTROLLER ACTION", thisJoinPoint);
-//	    }
-	    
-	    Object around() : controllerAction() {
-	        intercept("BEFORE CONTROLLER ACTION", thisJoinPoint);
+
+        Object around() : controllerAction() {
+	        intercept("before", thisJoinPoint);
 	        Object res = proceed();
-            intercept("AFTER CONTROLLER ACTION", thisJoinPoint);
+            Object[] paramValues = thisJoinPoint.getArgs();
+            intercept("after", thisJoinPoint);
 	        return res;
 	    }
 	    
@@ -54,13 +46,20 @@ public aspect MvcAspect extends MvcXpi implements ImplicitBpm {
 	    after() : saveMethod() {
             intercept("AFTER SAVE METHOD", thisJoinPoint);
 	    }
-	    
-	/////////
+
+        before() : inView() {
+            intercept("BEFORE IN VIEW", thisJoinPoint);
+        }
+
+
+    /////////
 
     protected void intercept(String desc, JoinPoint joinPoint) {
-        MethodSignature signature = (MethodSignature)joinPoint.getSignature();
-        //System.out.printf(joinPoint.getTarget().getClass().getName());
-        //System.out.printf(signature.getMethod().getName());
+        /*MethodSignature signature = (MethodSignature)joinPoint.getSignature();
+        System.out.printf(joinPoint.getTarget().getClass().getName());
+        System.out.printf(signature.getMethod().getName());
+        System.out.printf(desc);
+        */
 
         setDescription(desc);
         ImplicitBpmListener listener = ImplicitBpmListener.createInstance();
@@ -84,7 +83,7 @@ public aspect MvcAspect extends MvcXpi implements ImplicitBpm {
     }
 
     public String toString() {
-    	return getName()+" "+getDescription();
+    	return getName()+ " "+ getDescription();
     }
 
 }

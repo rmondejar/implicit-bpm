@@ -6,7 +6,7 @@ import groovy.transform.ToString
 class Workflow {
 
     def name
-    static hasMany = [weavers:Weaver]
+    static hasMany = [weavers: Weaver]
 
     static constraints = {
     }

@@ -17,10 +17,13 @@
  *****************************************************************************************/
 package net.sf.bpm.implicit
 
+import groovy.transform.ToString
+
+@ToString(includeNames=true, ignoreNulls = false)
 class Act {
 
-    static def elementEnum = ['action', 'view', 'event', 'task', 'domain', 'attribute', 'flow']
-    static def whenEnum = ['Before', 'Instead of', 'After']
+    static def elementEnum = ['action', 'view', 'event', 'task', 'domain', 'attribute', 'flow', 'element']
+    static def whenEnum = ['Before', 'Instead of', 'After', 'Replace']
 
     //act = when variable element [from controller ]
     String when
@@ -29,6 +32,7 @@ class Act {
     String fromController
 
     static belongsTo = [weaver:Weaver]
+    static hasMany = [behaviours:Behaviour]
 
     String toString() {
         "$when \"$variable\" $element${fromController?" from $fromController":''}"
@@ -44,5 +48,6 @@ class Act {
         variable size: 3..30, blank: false, nullable:false
         element inList: elementEnum
         fromController size: 3..30, blank: true, nullable:true
+        behaviours lazy: false
     }
 }

@@ -19,9 +19,6 @@
 package net.sf.bpm.implicit.util
 
 import grails.util.Environment
-import groovy.lang.GroovyClassLoader
-import groovy.util.ConfigObject
-import groovy.util.ConfigSlurper
 
 class ImplicitBpmUtils {
 

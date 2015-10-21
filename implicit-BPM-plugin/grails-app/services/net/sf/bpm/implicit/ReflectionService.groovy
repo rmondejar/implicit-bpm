@@ -93,14 +93,13 @@ class ReflectionService {
                     if (method.getAnnotation(Action)) {
                         def actions = controllerActionNames[logicalControllerName] ?: []
                         actions << method.name
-
+                        //println "controller: $logicalControllerName - ${method.name}"
                         controllerActionNames[logicalControllerName] = actions
                     }
                 }
 
             }
         }
-
         controllerActionNames
     }
 
@@ -118,7 +117,7 @@ class ReflectionService {
                 String path = "/${name}/${a}"
                 def view = groovyPageLocator.findViewByPath(path)
                 if (view) {
-                    println "$path -> ${view.uri}"
+                    //println "$path -> ${view.uri}"
                     viewPagesNames[name] += a
                 }
             }

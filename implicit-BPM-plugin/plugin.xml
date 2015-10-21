@@ -8,17 +8,16 @@
   <resources>
     <resource>DefaultImplicitBpmConfig</resource>
     <resource>ImplicitBpmBootStrap</resource>
+    <resource>ImplicitBpmFilters</resource>
     <resource>net.sf.bpm.implicit.ProxyController</resource>
     <resource>net.sf.bpm.implicit.Act</resource>
     <resource>net.sf.bpm.implicit.Application</resource>
     <resource>net.sf.bpm.implicit.Behaviour</resource>
     <resource>net.sf.bpm.implicit.Weaver</resource>
     <resource>net.sf.bpm.implicit.Workflow</resource>
-    <resource>net.sf.bpm.implicit.InterpreterService</resource>
     <resource>net.sf.bpm.implicit.PlatformService</resource>
     <resource>net.sf.bpm.implicit.ProxyService</resource>
     <resource>net.sf.bpm.implicit.ReflectionService</resource>
-    <resource>net.sf.bpm.implicit.WeaverService</resource>
   </resources>
   <repositories>
     <repository name='grailsCentral' url='http://grails.org/plugins' />
@@ -26,9 +25,9 @@
   </repositories>
   <dependencies>
     <compile>
-      <dependency group='commons-codec' name='commons-codec' version='1.6' />
-      <dependency group='org.codehaus.groovy.modules.http-builder' name='http-builder' version='0.7.1' />
       <dependency group='org.hibernate' name='hibernate-core' version='3.6.10.Final' />
+      <dependency group='org.codehaus.groovy.modules.http-builder' name='http-builder' version='0.7.1' />
+      <dependency group='commons-codec' name='commons-codec' version='1.6' />
     </compile>
     <runtime>
       <dependency group='org.aspectj' name='aspectjrt' version='1.7.4' />

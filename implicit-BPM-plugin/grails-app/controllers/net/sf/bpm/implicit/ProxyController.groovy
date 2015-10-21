@@ -47,21 +47,23 @@ class ProxyController {
 
         def jsonObj = request.JSON
         def w = new Weaver(appName: jsonObj.appName, inputDSL: jsonObj.inputDSL, active: true).save flush: true
-       jsonObj.acts.each{
-            def a = new Act()
+        println w
+        jsonObj.acts.each{
+        def a = new Act()
             a.element = it.element
             a.fromController = it.fromController
             a.variable = it.variable
             a.when = it.when
             println "the new act $a"
             w.addToActs(a)
+            it.behaviours.each{b->
+                a.addToBehaviours(new Behaviour(b))
+            }
         }
-        jsonObj.behaviours.each{
-            w.addToBehaviours(new Behaviour(it))
-        }
 
 
-
+        def weaverHelper = WeaverHelper.createInstance()
+        weaverHelper.refreshWeavers()
 
         /*
         //Set the domain back to the jsonObj

@@ -18,10 +18,10 @@
  *****************************************************************************************/
 package net.sf.bpm.implicit
 
+import net.sf.bpm.implicit.util.ImplicitBpmConfigFactory
+import org.aspectj.lang.JoinPoint
 import org.codehaus.groovy.grails.web.context.ServletContextHolder as SCH
 import org.codehaus.groovy.grails.web.servlet.GrailsApplicationAttributes as GA
-import org.aspectj.lang.JoinPoint
-import net.sf.bpm.implicit.util.ImplicitBpmConfigFactory
 
 class ImplicitBpmListener {
 

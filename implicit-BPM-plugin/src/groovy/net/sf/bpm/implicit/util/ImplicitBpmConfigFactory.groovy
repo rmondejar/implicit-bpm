@@ -18,9 +18,8 @@
  *****************************************************************************************/
 package net.sf.bpm.implicit.util
 
-import net.sf.bpm.implicit.ImplicitBpm;
-import net.sf.bpm.implicit.ImplicitBpmConfig;
-import groovy.util.ConfigObject
+import net.sf.bpm.implicit.ImplicitBpm
+import net.sf.bpm.implicit.ImplicitBpmConfig
 
 class ImplicitBpmConfigFactory {
 
@@ -29,5 +28,9 @@ class ImplicitBpmConfigFactory {
 	static ImplicitBpmConfig getConfig(ImplicitBpm proxy) {
 	    new ImplicitBpmConfig(implicitBpmConfig, proxy)
 	}
+
+    static ImplicitBpmConfig getConfig() {
+        new ImplicitBpmConfig(implicitBpmConfig, null)
+    }
 
 }

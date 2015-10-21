@@ -24,7 +24,7 @@ class Weaver {
     String inputDSL
     boolean active
 
-    static hasMany = [acts: Act, behaviours: Behaviour]
+    static hasMany = [acts: Act]
 
     static namedQueries = {
         actives {
@@ -32,19 +32,20 @@ class Weaver {
         }
     }
 
-    List getSortedBehaviours() {
+    /*List getSortedBehaviours() {
         behaviours?.sort {it.position}
-    }
+    }*/
 
     static mapping = {
         table 'IBPM_WEAVER_ENTRY'
         version false
         acts lazy: false
-        behaviours lazy: false
 
     }
 
     static constraints = {
         appName size: 3..50, blank: false, nullable:false
+        inputDSL size: 10..1000, blank: false
+
     }
 }

@@ -107,4 +107,9 @@ class ItemController {
             redirect(action: "show", id: id)
         }
     }
+
+    def newAction(){
+        println "newAction - Item"
+    }
+
 }

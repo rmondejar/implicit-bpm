@@ -18,73 +18,163 @@
  *****************************************************************************************/
 package net.sf.bpm.implicit
 
-import grails.gsp.PageRenderer
-import org.codehaus.groovy.grails.commons.DefaultGrailsDomainClass
-import org.codehaus.groovy.grails.commons.GrailsDomainClass
-import org.springframework.web.context.request.RequestContextHolder
+import org.apache.commons.logging.LogFactory
+import org.aspectj.lang.reflect.MethodSignature
 import org.codehaus.groovy.grails.web.util.WebUtils
 
-import javax.servlet.http.HttpServletRequest
 import javax.servlet.http.HttpServletResponse
-import javax.servlet.http.HttpSession
 
 class ProxyService {
 
+    def grailsApplication
     ReflectionService reflectionService
-    PageRenderer groovyPageRenderer
 
+    def packageName
+    def actualMethod
+    def actualController
 
+    WeaverHelper weaverHelper
 
-    def invoke(aspect,joinPoint) {
+    static final connectorsForElements = [
+                                            "action"   : ["perform", "trigger", "start"],
+                                            "view"     : ["render"],
+                                            "attribute": ["sets in", "sets", "set"],
+                                            "element"  : ["find", "save"],
+                                            "event"    : ["trigger", "start"],
+                                            "task"     : ["trigger", "start"]
+
+    ]
+
+    def attributes = [:]
+    def isReturned
+
+    static final SLASH = "/"
+    static final log = LogFactory.getLog(this)
+
+    def invoke(aspect, joinPoint) {
         //aspect -> when, controller
+        println "Proxy invoke " + aspect + " -> " + joinPoint;
 
-        println "Proxy invoke "+aspect+" -> "+joinPoint;
+        MethodSignature signature = (MethodSignature) joinPoint.getSignature();
+        actualMethod = signature.method.name
+        String className = joinPoint.getTarget().getClass().getName();
+        String actualClass = joinPoint.getTarget().getClass().getName();
+        packageName = actualClass.substring(0, actualClass.lastIndexOf("."))
 
-        List weavers = Weaver.actives.list()
-        println "Proxy weavers : $weavers"
+        String[] actualControllerNameArray = actualClass.split("\\.")
+        actualController = actualControllerNameArray?.getAt(-1).substring(0, actualControllerNameArray[-1].lastIndexOf("Controller")).toLowerCase()
 
-        def modelInfo = reflectionService.modelClassNames
-        modelInfo.each{k, Class v->
-            println k
-            println v
-            /*def newDomainObject = v.newInstance()
-            println newDomainObject*/
-        }
+        weaverHelper = WeaverHelper.createInstance()
 
-        weavers.each { Weaver weaver ->
-            //println weaver
-            weaver.behaviours.each {
-                //println it
-                if(it.connector == "render"){
-                    reflectionService.viewInfo.each { k, v ->
-                        v.each{ viewName ->
-                            if (viewName == it.variable){
+        def actsForJoinPoint = weaverHelper.getActsForJointPointFromAll(weaverHelper.getWhenActions(actualMethod, actualController, aspect.getDescription()),
+                actualMethod, actualController)
 
-                                /*String html = groovyPageRenderer.render(view: viewName, model: k)
-                                HttpServletResponse response = WebUtils.retrieveGrailsWebRequest().getCurrentResponse()
-                                response.setStatus(200)
-                                response.setContentType('text/html')
-                                response.writer.write(html)
-                                response.sendRedirect(html)*/
+        println "actsForJoinPoint: $actsForJoinPoint"
 
 
-                            }
-                        }
-                    }
+        actsForJoinPoint.each { a ->
+            isReturned = false
+            a.behaviours.each { b ->
+                assert b.connector in ProxyService.connectorsForElements[b.element]
+                b.fromController = weaverHelper.controllerInfo.containsKey(b.fromController) ? b.fromController : actualController
+                this."$b.element"(b)
+                if (b.connector in ProxyService.connectorsForElements["view"]) {
+                    return
                 }
             }
         }
+    }
 
+    def action(behaviour) {
+        def ctx = grailsApplication.mainContext
+        def controllerObject = (GroovyObject) ctx.getBean(packageName + "." +
+                behaviour.fromController.capitalize() + "Controller"); //controller.getFullName()
+        //if (controllerObject.metaClass.respondsTo(controllerObject, behaviour.variable)){
+
+        if (behaviour.fromController == actualController && behaviour.variable == actualMethod)
+            return
+        if (behaviour.variable in weaverHelper.controllerInfo[behaviour.fromController]) {
+            controllerObject."$behaviour.variable"()
+            return
+        }
+        log.error("Controller doesn't have the specified action. \nController: ${behaviour.fromController}\nAction: ${behaviour.variable} ")
+    }
+
+    def view(behaviour) {
+        if (behaviour.act.when == "replace")
+            return
+        def controller = behaviour.fromController
+        def view = behaviour.variable
+        HttpServletResponse response = WebUtils.retrieveGrailsWebRequest().getCurrentResponse()
+        //RequestContextHolder.currentRequestAttributes().response
+        //HttpServletRequest currentReq = webUtils.getCurrentRequest()
+        def webUtils = WebUtils.retrieveGrailsWebRequest()
+
+        def actualControllerName = webUtils.controllerName.toLowerCase()
+        webUtils.controllerName = controller
+        // webUtils.actionName = behaviour.element
+
+        def redirectPath
+        if (actualControllerName == controller) {
+            if (view == actualMethod) {
+                return
+            }
+            redirectPath = view
+        } else {
+            redirectPath = ".." + ProxyService.SLASH + controller + ProxyService.SLASH + view
+        }
+
+        if (view in weaverHelper.viewInfo[behaviour.fromController]) {
+            response.sendRedirect(redirectPath)
+            return
+        }
+        log.error("No such view in controller. \nController: ${behaviour.fromController}\nAction: ${view} ")
 
     }
 
-    def actionAct() {
+    def element(behaviour) {
+
+        attributes["name"] = "Gold Fish" // for initialization
+        weaverHelper = WeaverHelper.createInstance()
+        def domainClass = grailsApplication.classLoader.loadClass(weaverHelper.modelInfo[behaviour.variable]?.name)
+        def element
+        if(behaviour.connector == "find"){
+            def findBy = "findBy" + behaviour.byVariable?.capitalize()
+            element = domainClass."$findBy"(attributes[behaviour.byVariable] ?: "")
+            println "element found: $element"
+            isReturned = true
+        } else { // "save"
+            element = domainClass.newInstance()
+            element.save()
+            println "element saved: $element"
+        }
+
+        element
 
     }
 
-    def taskAct() {
-
+    def attribute(behaviour){
+        attributes["exist"] = false // for initialization
+        if(isReturned){
+            attributes[behaviour.variable] = true;
+            println "is Returned: $isReturned"
+        }
     }
 
+    def event(Behaviour behaviour){
+        //TODO
+    }
+
+    def task(Behaviour behaviour){
+        //TODO
+    }
+
+    def flow(Behaviour behaviour){
+        //TODO
+    }
+
+//    def methodMissing(String name, args){
+//        println "method is missing: $name, $args"
+//    }
 
 }
